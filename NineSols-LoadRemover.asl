@@ -24,8 +24,7 @@ init
 start {
   if (settings["fileselect_start"] 
     && (vars.Helper["gamestart"].Current != vars.Helper["gamestart"].Old)
-  ) 
-  { 
+  ) { 
     return vars.Helper["gamestart"].Current; 
   }
   else {
@@ -48,14 +47,14 @@ update
 
 reset 
 {
-  if (old.SceneIndex != current.SceneIndex && current.SceneIndex == 1 && old.SceneIndex == 0 && settings["mainmenu_reset"]) { return true; }
+  if (settings["mainmenu_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 1 && old.SceneIndex == 0) { return true; }
 }
 
 /*
 Scenes:
 0 - Blank / Load
-1 - Title Screen
-72 - Clear Transition
-7 - Intro Video
-5 - Intro Tutorial
+1 - "TitleScreenMenu" - Title Screen
+72 - "ClearTransition"
+7 - "A0_S6_Intro_Video" - Intro Video
+5 - "A0_S4_tutorial" - Intro Tutorial
  */
