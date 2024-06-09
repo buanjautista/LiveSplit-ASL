@@ -37,7 +37,7 @@ start {
 
 isLoading
 {
-  return (vars.Helper["loading"].Current || (current.SceneIndex == 0) || (current.SceneIndex == 72));
+  return (vars.Helper["loading"].Current || (current.SceneIndex == 0) || (current.SceneIndex == 72) || (current.SceneIndex == 7));
 }
 
 update
