@@ -2,6 +2,12 @@ state("NineSols") {}
 
 startup
 {
+	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
+	vars.Helper.GameName = "NineSols";
+	vars.Helper.LoadSceneManager = true;
+	vars.Helper.AlertLoadless();
+
+  vars.CompletedSplits = new HashSet<string>();
   vars.skills = new Dictionary<string, string>
   {
     { "Mystic Nymph", "skills_HackDroneAbility" },
@@ -14,20 +20,18 @@ startup
     { "Super Mutant Buster", "skills_KillZombieFooAbility" }
   };
 
-	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	vars.Helper.GameName = "NineSols";
-	vars.Helper.LoadSceneManager = true;
-	vars.Helper.AlertLoadless();
-
 	settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
   settings.Add("main_skills", false, "Main Skills");
-  foreach (var skill in vars.skills) { settings.Add(skill.Value, false, skill.Key, "main_skills"); }
+  foreach (var skill in vars.skills) { 
+    settings.Add(skill.Value, false, skill.Key, "main_skills"); 
+  }
 }
 
 init
 {
+  current.SceneIndex = 0;
    vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
    {
 
@@ -37,7 +41,8 @@ init
        vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load
 
        vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
-      //  vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","_newGameMode"); 
+      //  vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","ChooseModePanel"); 
+      //  vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","confirmStartGameButton",0x00,0x20); 
 
       /* Skills */ 
        vars.Helper["skills_HackDroneAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xf8,0x17a); 
@@ -70,6 +75,10 @@ start {
   }
 }
 
+onStart {
+  vars.CompletedSplits.Clear();
+}
+
 isLoading
 {
   return (vars.Helper["loadingscreen"].Current || (!vars.Helper["levelloading"].Current) || (current.SceneIndex == 0) || (current.SceneIndex == 72) || (current.SceneIndex == 7));
@@ -90,7 +99,8 @@ split {
   /* To-do: Add a check for when you exit the map where you obtain the skill, instead of splitting there  */ 
     foreach (var skill in vars.skills) {
       if (settings[skill.Value] && vars.Helper[skill.Value].Current != vars.Helper[skill.Value].Old) {
-        return true;
+        print("splitting for: " + skill);
+        return true && vars.CompletedSplits.Add(skill.Value);
       }
     }
 }
