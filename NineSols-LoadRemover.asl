@@ -13,9 +13,10 @@ startup
   // god i wish there was an easier way of doing this 
   vars.abilityrooms = new Dictionary<string, string> { { "Tai Chi Counter Room", "room_Taichi" }, { "Charged Strike Room", "room_Charged" }, { "Air Dash", "room_Airdash" }, { "Unbounded Counter Room", "room_Unbounded" }, { "Double Jump Room", "room_DoubleJump" } };
   vars.vrmemory = new Dictionary<string, string> { { "Kuafu Seal", "room_KuafuVR" }, { "Goumang Seal", "room_GoumangVR" }, { "Yanlao Seal", "room_YanlaoVR" }, { "Jiequan Seal", "room_JiequanVR" }, { "Fake Lady Ethereal Seal", "room_fakeFudie" }, { "After Lady Ethereal fight", "room_Butterfly" }, { "Ji Seal", "room_JiVR" }, { "Fuxi Seal", "room_FuxiVR" }, { "Nuwa Seal", "room_NuwaVR" }, { "Eigong Soulscape", "room_EigongSoulscape" } };
+  vars.bosses = new Dictionary<string, string> { { "Red Tiger Elite: Baichang", "baichang_kill" }, { "Xingtian", "xingtian_kill" }, { "Kanghui", "kanghui_kill" }, { "Celestial Enforcer: Huanxian", "huanxian_kill" }, { "The Great Miner: Tianshou", "tianshou_kill" }, { "Eigong", "eigong_kill" } };
   
-  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 } };
-  vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" } };
+  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 }, { "eigong_kill", 104 }, { "trueeigong_kill", 113 } };
+  vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" }, { "baichang_kill", "A1_S2_ConnectionToElevator_Final" }, { "xingtian_kill", "A4_S3_ControlRoom_Final" }, { "kanghui_kill", "A5_S2_Jail_Remake_Final" }, { "huanxian_kill", "A7_S2_SectionF_MiniBossFight" }, { "tianshou_kill", "A9_S1_Remake_4wei" }, { "eigong_kill", "A11_S0_Boss_YiGung" }, { "trueeigong_kill", "A11_S0_Boss_YiGung" }};
 
 	settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
@@ -36,10 +37,9 @@ startup
   }
 
   settings.Add("boss_kill", false, "Split on Boss Kill (experimental)");
-  settings.Add("baichang_kill", false, "Red Tiger Elite", "boss_kill");
-  settings.Add("xingtian_kill", false, "Xingtian", "boss_kill");
-  settings.Add("kanghui_kill", false, "Kanghui", "boss_kill");
-  settings.Add("eigong_kill", false, "Eigong", "boss_kill");
+  foreach (var boss in vars.bosses) { 
+    settings.Add(boss.Value, false, boss.Key, "boss_kill"); 
+  }
 }
 
 init
@@ -48,31 +48,31 @@ init
   current.Scene = "";
    vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
    {
-
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
-       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
-       vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load
-      //  vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
 
-       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
+      vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
+      vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load
+      vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
 
-       vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
+      vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
+
+      vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
 
       /* Skills */ 
-       vars.Helper["skills_HackDroneAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xf8,0x17a); 
-       vars.Helper["skills_ParryJumpKickAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xa8,0x17a); 
-       vars.Helper["skills_ArrowAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x110,0x17a); 
-       vars.Helper["skills_ChargedAttackAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xe8,0x17a); 
-       vars.Helper["skills_RollDodgeInAirUpgrade"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xc0,0x17a); 
-       vars.Helper["skills_ParryCounterAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x100,0x17a); 
-       vars.Helper["skills_AirJumpAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x108,0x17a); 
-       vars.Helper["skills_KillZombieFooAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x118,0x17a); 
+      vars.Helper["skills_HackDroneAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xf8,0x17a); 
+      vars.Helper["skills_ParryJumpKickAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xa8,0x17a); 
+      vars.Helper["skills_ArrowAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x110,0x17a); 
+      vars.Helper["skills_ChargedAttackAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xe8,0x17a); 
+      vars.Helper["skills_RollDodgeInAirUpgrade"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xc0,0x17a); 
+      vars.Helper["skills_ParryCounterAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x100,0x17a); 
+      vars.Helper["skills_AirJumpAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x108,0x17a); 
+      vars.Helper["skills_KillZombieFooAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x118,0x17a); 
        
-       /* Boss States */ 
-       vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
+      /* Boss States */ 
+      vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
 
-       vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
+      vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
       //  vars.Helper["LastEnemyPostureFinish"] = GameCore.Make<bool>("_instance","player", 0x4c8,0x398,0x90); 
        return true;
    });
@@ -100,7 +100,7 @@ onStart {
 isLoading
 {
   /* (vars.Helper["gamestate"] == 2) is changing scenes, in case needed to rewrite this */ 
-  return (vars.Helper["loadingscreen"].Current || (!vars.Helper["levelloading"].Current) || (current.SceneIndex == 0) || (current.SceneIndex == 72) || (current.SceneIndex == 7));
+  return (vars.Helper["loadingscreen"].Current || (!vars.Helper["levelloading"].Current) || (current.SceneIndex == 0) || (current.SceneIndex == 72) || (current.SceneIndex == 7) || (current.SceneIndex == 1 && vars.Helper["gamestate"].Current == 0));
 }
 
 update
@@ -144,12 +144,23 @@ split {
     /* Split on Boss Kill (experimental)
     This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
 
-    if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old 
-      && vars.Helper["SlowMotion"].Current < 0.05){
-      if(settings["eigong_kill"] && ((current.Scene == "A11_S0_Boss_YiGung") || (current.SceneIndex == 113)) && vars.Helper["PhaseIndex"].Current >= 1) { return true && vars.CompletedSplits.Add("eigong_kill"); }
-      if(settings["baichang_kill"] && ((current.Scene == "A1_S2_ConnectionToElevator_Final") ) ) { return true && vars.CompletedSplits.Add("baichang_kill"); }
-      if(settings["xingtian_kill"] && ((current.Scene == "A4_S3_ControlRoom_Final") ) ) { return true && vars.CompletedSplits.Add("xingtian_kill"); }
-      if(settings["kanghui_kill"] && ((current.Scene == "A5_S2_Jail_Remake_Final") ) && vars.Helper["PhaseIndex"].Current >= 2) { return true && vars.CompletedSplits.Add("kanghui_kill"); }
+    foreach (var boss in vars.bosses) {
+      if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
+        if (settings[boss.Value] 
+        && (current.Scene == vars.roomNames[boss.Value]))
+        {
+          // Only split if on the correct phase
+          if ((boss.Value == "eigong_kill" && vars.Helper["PhaseIndex"].Current < 1) || (boss.Value == "kanghui_kill" && vars.Helper["PhaseIndex"].Current < 2)) {
+            return false;
+          }
+          print("splitting for: " + boss);
+          return true && vars.CompletedSplits.Add(boss.Value);
+        }
+        if (boss.Value == "eigong_kill" && current.SceneIndex == vars.roomIndexes[boss.Value] && vars.Helper["PhaseIndex"].Current >= 2) {
+          print("splitting for: " + boss);
+          return true && vars.CompletedSplits.Add(boss.Value);
+        }
+      }
     }
 }
 /*
