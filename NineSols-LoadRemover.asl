@@ -143,7 +143,7 @@ split {
           if (vars.roomIndexes[vrmemory.Value] == old.SceneIndex || vars.roomNames[vrmemory.Value] == old.Scene)
           {
             print("splitting for: " + vrmemory);
-            return settings[vrmemory.Value];
+            return settings[vrmemory.Value] && vars.CompletedSplits.Add(vrmemory.Value);
           }
       }
     }
