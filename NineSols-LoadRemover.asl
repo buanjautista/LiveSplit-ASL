@@ -50,10 +50,12 @@ init
    {
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
+      var SaveManager = mono["SaveManager",1];
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
       vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load
       vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
+      // vars.Helper["seamlessload"] = GameCore.Make<bool>("_instance","_currentSeamlessConnectionPoint",0x48); 
 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
@@ -73,6 +75,10 @@ init
       vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
 
       vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
+
+      // vars.Helper["AllFlags"] = SaveManager.MakeList<bool>("_instance","allFlags", 0x18);
+      // vars.Helper["AllFlags"] = SaveManager.MakeArray<IntPtr>("_instance","allFlags", 0x20);
+      // 0x38, "flagDict") 
       //  vars.Helper["LastEnemyPostureFinish"] = GameCore.Make<bool>("_instance","player", 0x4c8,0x398,0x90); 
        return true;
    });
@@ -100,13 +106,21 @@ onStart {
 isLoading
 {
   /* (vars.Helper["gamestate"] == 2) is changing scenes, in case needed to rewrite this */ 
-  return (vars.Helper["loadingscreen"].Current || (!vars.Helper["levelloading"].Current) || (current.SceneIndex == 0) || (current.SceneIndex == 72) || (current.SceneIndex == 7) || (current.SceneIndex == 1 && vars.Helper["gamestate"].Current == 0));
+  return (vars.Helper["loadingscreen"].Current 
+  || (!vars.Helper["levelloading"].Current) 
+  || (vars.Helper["gamestate"].Current == 0)  
+  || (vars.Helper["gamestate"].Current == 2) 
+  || (current.SceneIndex == 0) 
+  || (current.SceneIndex == 72) 
+  || (current.SceneIndex == 7));
 }
 
 update
 {
   current.SceneIndex = vars.Helper.Scenes.Active.Index;
   current.Scene = vars.Helper.Scenes.Active.Name;
+
+  //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }
 }
 
 reset 
@@ -116,50 +130,49 @@ reset
 
 
 split {
-  
-  /* Split on Ability obtain (on the first triggers) */ 
-    foreach (var ability in vars.abilities) {
-      if (settings[ability.Value] && vars.Helper[ability.Value].Current != vars.Helper[ability.Value].Old) {
-        print("splitting for: " + ability);
-        return true && vars.CompletedSplits.Add(ability.Value);
+    if (old.SceneIndex != current.SceneIndex) {
+      foreach (var abilityroom in vars.abilityrooms) {
+      /* Split on exiting ability rooms*/
+        if (vars.roomIndexes[abilityroom.Value] == old.SceneIndex || vars.roomNames[abilityroom.Value] == old.Scene) {
+          print("splitting for: " + abilityroom);
+          return settings[abilityroom.Value] && vars.CompletedSplits.Add(abilityroom.Value);
+        }
       }
-    }
-
-  /* Split on Ability room exit,  */ 
-    foreach (var abilityroom in vars.abilityrooms) {
-      if (settings[abilityroom.Value] && old.SceneIndex != current.SceneIndex && (vars.roomIndexes[abilityroom.Value] == old.SceneIndex || vars.roomNames[abilityroom.Value] == old.Scene)) {
-        print("splitting for: " + abilityroom);
-        return true && vars.CompletedSplits.Add(abilityroom.Value);
-      }
-    }
-    /* Split on exiting VR memory rooms*/
-    foreach (var vrmemory in vars.vrmemory) {
-      if (settings[vrmemory.Value] && old.SceneIndex != current.SceneIndex && (vars.roomIndexes[vrmemory.Value] == old.SceneIndex || vars.roomNames[vrmemory.Value] == old.Scene))
-      {
-        print("splitting for: " + vrmemory);
-          return true && vars.CompletedSplits.Add(vrmemory.Value);
+      /* Split on exiting VR memory rooms*/
+      foreach (var vrmemory in vars.vrmemory) {
+          if (vars.roomIndexes[vrmemory.Value] == old.SceneIndex || vars.roomNames[vrmemory.Value] == old.Scene)
+          {
+            print("splitting for: " + vrmemory);
+            return settings[vrmemory.Value];
+          }
       }
     }
 
     /* Split on Boss Kill (experimental)
     This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
-
     foreach (var boss in vars.bosses) {
       if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
-        if (settings[boss.Value] 
-        && (current.Scene == vars.roomNames[boss.Value]))
+        if (current.Scene == vars.roomNames[boss.Value])
         {
           // Only split if on the correct phase
           if ((boss.Value == "eigong_kill" && vars.Helper["PhaseIndex"].Current < 1) || (boss.Value == "kanghui_kill" && vars.Helper["PhaseIndex"].Current < 2)) {
             return false;
           }
           print("splitting for: " + boss);
-          return true && vars.CompletedSplits.Add(boss.Value);
+          return settings[boss.Value] && vars.CompletedSplits.Add(boss.Value);
         }
         if (boss.Value == "eigong_kill" && current.SceneIndex == vars.roomIndexes[boss.Value] && vars.Helper["PhaseIndex"].Current >= 2) {
           print("splitting for: " + boss);
-          return true && vars.CompletedSplits.Add(boss.Value);
+          return settings[boss.Value] && vars.CompletedSplits.Add(boss.Value);
         }
+      }
+    }
+
+    /* Split on Ability obtain (on the first triggers) */ 
+    foreach (var ability in vars.abilities) {
+      if (vars.Helper[ability.Value].Current != vars.Helper[ability.Value].Old) {
+        print("splitting for: " + ability);
+        return settings[ability.Value] && vars.CompletedSplits.Add(ability.Value);
       }
     }
 }
