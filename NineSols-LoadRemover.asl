@@ -229,7 +229,7 @@ update
   current.SceneIndex = vars.Helper.Scenes.Active.Index;
   current.Scene = vars.Helper.Scenes.Active.Name;
 
-  //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }   
+  //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }
 }
 
 reset 
@@ -244,8 +244,7 @@ split {
       /* Split on exiting ability rooms*/
         if (vars.roomIndexes[abilityroom.Value] == old.SceneIndex || vars.roomNames[abilityroom.Value] == old.Scene) {
           print("splitting for: " + abilityroom);
-          if(settings[abilityroom.Value])
-          {
+          if(settings[abilityroom.Value]) {
             return vars.CompletedSplits.Add(abilityroom.Value);
           }
         }
@@ -255,8 +254,7 @@ split {
           if (vars.roomIndexes[vrmemory.Value] == old.SceneIndex || vars.roomNames[vrmemory.Value] == old.Scene)
           {
             print("splitting for: " + vrmemory);
-            if(settings[vrmemory.Value])
-            {
+            if(settings[vrmemory.Value]) {
               return vars.CompletedSplits.Add(vrmemory.Value);
             }
           }
@@ -267,8 +265,7 @@ split {
     foreach (var ability in vars.abilities) {
       if (vars.Helper[ability.Value].Current != vars.Helper[ability.Value].Old) {
         print("splitting for: " + ability);
-        if(settings[ability.Value])
-        {
+        if(settings[ability.Value]) {
           return vars.CompletedSplits.Add(ability.Value);
         }
       }
