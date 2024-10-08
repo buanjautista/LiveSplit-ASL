@@ -23,10 +23,13 @@ startup
   // Boss Kills
   vars.gameFlags.Add("740a8b30-e3cc-4acc-9f5f-da3aaae1df5e_51c211e21fecd9e4c92f41d8d72aa395ScriptableDataBool", Tuple.Create("boss_kill", "Red Tiger Elite: Baichang", "ScriptableDataBool") );
   vars.gameFlags.Add("2798b3a9-1026-4d53-b41c-5489699a19de_c3c3f30fb046d9743aea48eb8f4833bcScriptableDataBool", Tuple.Create("boss_kill", "Celestial Sentinel: Jiaoduan", "ScriptableDataBool") );
+  vars.gameFlags.Add("f5b26e3311ce4e84a961dc36a05e19b7ScriptableDataBool", Tuple.Create("boss_kill", "Goumang", "ScriptableDataBool") );
   vars.gameFlags.Add("098316c3b4ddf514fbc2dc2806475da2ScriptableDataBool", Tuple.Create("boss_kill", "Xingtian", "ScriptableDataBool") );
   vars.gameFlags.Add("b500f8ebeb10f46a085b9720f5a78affScriptableDataBool", Tuple.Create("boss_kill", "Kanghui", "ScriptableDataBool") );
   vars.gameFlags.Add("bc5ca55c-065c-4ad8-9f18-bbc7ab2e468a_11c84f9bfd4e1445395ec443308d3965ScriptableDataBool", Tuple.Create("boss_kill", "Celestial Enforcer: Huanxian", "ScriptableDataBool") );
   vars.gameFlags.Add("50926aad-0750-4f3b-9318-dc5da45e75f1_4256ef2ec22f942dc9f70607bb00391fScriptableDataBool", Tuple.Create("boss_kill", "The Great Miner: Tianshou", "ScriptableDataBool") );
+  vars.gameFlags.Add("b02ac84c63b804448b50c45c7f19ebb8ScriptableDataBool", Tuple.Create("boss_kill", "Red Tiger Elite: Lieguan", "ScriptableDataBool") );
+  vars.gameFlags.Add("eb5c407de5f18ae478f86b4287bcd600ScriptableDataBool", Tuple.Create("boss_kill", "Spirit Keeper: Cixing", "ScriptableDataBool") );
   vars.gameFlags.Add("e965aab1c014b4273b928b17fbcff379ScriptableDataBool", Tuple.Create("boss_kill", "Eigong", "ScriptableDataBool") );
   
   // Jades
@@ -79,7 +82,7 @@ startup
   vars.gameFlags.Add("0c76757489a7fa542b4351efc4731a49ItemData", Tuple.Create("artifact_obtain", "The Legend of the Porky Heroes", "GameFlagDescriptable") );
   vars.gameFlags.Add("c50645a6658fe4b429ea575c35c28ba3ItemData", Tuple.Create("artifact_obtain", "Portrait of Yi", "GameFlagDescriptable") );
   
-  //Poisons
+  // Poisons
   vars.gameFlags.Add("c753eb7cbd4ae7048a0dcc715b23e6f0ItemData", Tuple.Create("poison_obtain", "Medicinal Citrine", "GameFlagDescriptable") );
   vars.gameFlags.Add("c40e455c58fa8e444aa5c8657de9143eItemData", Tuple.Create("poison_obtain", "Golden Yinglong Egg", "GameFlagDescriptable") );
   vars.gameFlags.Add("96d11b4a9a625ab488ca42e489787eeaItemData", Tuple.Create("poison_obtain", "Molted Tianma Hide", "GameFlagDescriptable") );
@@ -95,6 +98,44 @@ startup
   vars.gameFlags.Add("4bb79b0a891845542848960ddfd0a03cItemData", Tuple.Create("poison_obtain", "Thunder Centipede", "GameFlagDescriptable") );
   vars.gameFlags.Add("00b0232c825990a45a3aad8212dff74eItemData", Tuple.Create("poison_obtain", "Wall-climbing Gecko", "GameFlagDescriptable") );
   vars.gameFlags.Add("2203778119e9b0540a493e3d4981d5e2ItemData", Tuple.Create("poison_obtain", "Gutwrench Fruit", "GameFlagDescriptable") );
+
+  // Root Nodes
+  vars.gameFlags.Add("3f4604f810c9e9a469f01d352d8035b9TeleportPointData", Tuple.Create("rootnode_unlock", "Galactic Dock", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b3cf5264bd5d54b06975638acac58b2aTeleportPointData", Tuple.Create("rootnode_unlock", "Apeman Facility (Monitoring)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("113385c61a2544446925e7516fea6016TeleportPointData", Tuple.Create("rootnode_unlock", "Apeman Facility (Elevator) 1", "GameFlagDescriptable") );
+  vars.gameFlags.Add("2ee85cc763a3d413f9b6e18e7e1fee67TeleportPointData", Tuple.Create("rootnode_unlock", "Apeman Facility (Elevator) 2", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b9e8a5c6d9f6e4812bf9cc30810faadbTeleportPointData", Tuple.Create("rootnode_unlock", "Apeman Facility (Depths)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("9bf82941e7038a44980ca867c751e5cbTeleportPointData", Tuple.Create("rootnode_unlock", "Power Reservoir (Central)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("610a3a3232701af47b876a660910fccaTeleportPointData", Tuple.Create("rootnode_unlock", "Power Reservoir (East)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("a71b5769629d443ef9af5e3a05385c73TeleportPointData", Tuple.Create("rootnode_unlock", "Power Reservoir (West)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b3310817230814fa09f5fa3b12cb6293TeleportPointData", Tuple.Create("rootnode_unlock", "Radiant Pagoda", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e5246ef15ff2a41ae884071b014351f4TeleportPointData", Tuple.Create("rootnode_unlock", "Central Transport Hub", "GameFlagDescriptable") );
+  vars.gameFlags.Add("07215bbc4dc4247aeb7a980bf4910bf9TeleportPointData", Tuple.Create("rootnode_unlock", "Lake Yaochi Ruins", "GameFlagDescriptable") );
+  vars.gameFlags.Add("126a7caa6701e4f0a9059b603a309c3fTeleportPointData", Tuple.Create("rootnode_unlock", "Greenhouse", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b242c961367ad6a49889999af22a46d9TeleportPointData", Tuple.Create("rootnode_unlock", "Water & Oxygen Synthesis", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1025e9e6b5d9440979328bcc29d89468TeleportPointData", Tuple.Create("rootnode_unlock", "Agrarian Hall", "GameFlagDescriptable") );
+  vars.gameFlags.Add("685eb4dc303abbd43a67a07cf0459c64TeleportPointData", Tuple.Create("rootnode_unlock", "Yinglong Canal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("afbe61da78699487faccd6f0ae1d9667TeleportPointData", Tuple.Create("rootnode_unlock", "Outer Warehouse", "GameFlagDescriptable") );
+  vars.gameFlags.Add("2c8de8a9dfacf4f65a0fa1e60a16f852TeleportPointData", Tuple.Create("rootnode_unlock", "Inner Warehouse", "GameFlagDescriptable") );
+  vars.gameFlags.Add("242132789f3c9e94bbabb096bad651a5TeleportPointData", Tuple.Create("rootnode_unlock", "Boundless Repository", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c748d8c36b73c464fa38d9b156c0b0bcTeleportPointData", Tuple.Create("rootnode_unlock", "Factory (Great Hall)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("28a1908d9e21d4136b8c903e2b92b0afTeleportPointData", Tuple.Create("rootnode_unlock", "Prison", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4970d157835c54adbb55bb4f8e245fdfTeleportPointData", Tuple.Create("rootnode_unlock", "Factory (Machine Room)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("7a581656cd08345b793d7ad2b14e9943TeleportPointData", Tuple.Create("rootnode_unlock", "Factory (Production Area)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("7b8d46b0c0c1845fe893ce18aa67bca3TeleportPointData", Tuple.Create("rootnode_unlock", "Shengwu Hall", "GameFlagDescriptable") );
+  vars.gameFlags.Add("f1e11be280022400caf9c8593ead7d43TeleportPointData", Tuple.Create("rootnode_unlock", "Factory (Underground)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3b7b8da692cb64d298142612c02daa4cTeleportPointData", Tuple.Create("rootnode_unlock", "Abandoned Mines", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c971454704bfa480880660b06e4af2c7TeleportPointData", Tuple.Create("rootnode_unlock", "Cortex Center", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8e915ab1790ef69468d4d49d4f338db2TeleportPointData", Tuple.Create("rootnode_unlock", "Empyrean Dist. (Passages)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1a4e7bc2545139145ba229dac285581bTeleportPointData", Tuple.Create("rootnode_unlock", "Empyrean Dist. (Living Area)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("ba5ec4c4a702ba84baec1326a803b2b6TeleportPointData", Tuple.Create("rootnode_unlock", "Empyrean Dist. (Sanctum)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("32bafafe1cacf5c49af2f7c9e45fe511TeleportPointData", Tuple.Create("rootnode_unlock", "Sky Tower", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4bb93fbefaedb8e47949d1d384220c21TeleportPointData", Tuple.Create("rootnode_unlock", "Grotto of Scriptures (Entry)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1b81567d30abe194d845d3f08beae8fdTeleportPointData", Tuple.Create("rootnode_unlock", "Grotto of Scriptures (East)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("fbaf57e3f6bea904ea8c150e5915bcf4TeleportPointData", Tuple.Create("rootnode_unlock", "Grotto of Scriptures (West)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("5c30ad493bbdebc40a2370664d46b830TeleportPointData", Tuple.Create("rootnode_unlock", "Tiandao Research Center", "GameFlagDescriptable") );
+  vars.gameFlags.Add("473d9c581cd574f62a36519ae3d451ebTeleportPointData", Tuple.Create("rootnode_unlock", "Tianhuo Research Institute", "GameFlagDescriptable") );
+  vars.gameFlags.Add("da6613d2c8f7e4eb6ae1b4d0fe7fee93TeleportPointData", Tuple.Create("rootnode_unlock", "New Kunlun Control Hub", "GameFlagDescriptable") );
   
   settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
@@ -119,6 +160,7 @@ startup
   settings.Add("jade_obtain", false, "Split on obtaining a jade (experimental)");
   settings.Add("artifact_obtain", false, "Split on obtaining an artifact (experimental)");
   settings.Add("poison_obtain", false, "Split on obtaining a poison (experimental)");
+  settings.Add("rootnode_unlock", false, "Split on unlocking a root node (experimental)");
   
   // Add individual flag settings
   foreach (var flagEntry in vars.gameFlags) {
@@ -169,11 +211,14 @@ init
          if(vars.gameFlags.ContainsKey(finalSaveID)) {
             string className = vars.gameFlags[finalSaveID].Item3;
             if(className == "GameFlagDescriptable") {
-               //GameFlagDescriptable.Acquired
-               IntPtr acquiredFieldPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x48);
+               //GameFlagDescriptable.acquired
+               //IntPtr acquiredFieldPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x48);
+
+               //GameFlagDescriptable.unlocked
+               IntPtr unlockedFieldPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x40);
                
-               //GameFlagDescriptable.Acquired._currentValue;
-               vars.Helper[finalSaveID] = vars.Helper.Make<bool>(acquiredFieldPtr + 0x3a);
+               //GameFlagDescriptable.unlocked._currentValue;
+               vars.Helper[finalSaveID] = vars.Helper.Make<bool>(unlockedFieldPtr + 0x3a);
                
                vars.FoundFlags.Add(finalSaveID);
             }
@@ -274,7 +319,7 @@ split {
     /* Split on Game Flag being set */
     foreach (var saveFlagID in vars.FoundFlags) {
       if (vars.Helper[saveFlagID].Current != vars.Helper[saveFlagID].Old) {
-        print("splitting for flag: " + saveFlagID);
+        print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
         if(settings[saveFlagID]) {
           return vars.CompletedSplits.Add(saveFlagID);
         }
