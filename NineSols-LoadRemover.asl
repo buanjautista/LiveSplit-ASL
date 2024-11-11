@@ -10,19 +10,35 @@ startup
   vars.CompletedSplits = new HashSet<string>();
   vars.abilities = new Dictionary<string, string> { { "Mystic Nymph", "skills_HackDroneAbility" }, { "Tai Chi Counter", "skills_ParryJumpKickAbility" }, { "Azure Bow", "skills_ArrowAbility" }, { "Charged Strike", "skills_ChargedAttackAbility" }, { "Air Dash", "skills_RollDodgeInAirUpgrade" }, { "Unbounded Counter", "skills_ParryCounterAbility" }, { "Double Jump", "skills_AirJumpAbility" }, { "Super Mutant Buster", "skills_KillZombieFooAbility" } };
 
-  // god i wish there was an easier way of doing this 
-  vars.abilityrooms = new Dictionary<string, string> { { "Tai Chi Counter Room", "room_Taichi" }, { "Charged Strike Room", "room_Charged" }, { "Air Dash", "room_Airdash" }, { "Unbounded Counter Room", "room_Unbounded" }, { "Double Jump Room", "room_DoubleJump" } };
-  vars.vrmemory = new Dictionary<string, string> { { "Kuafu Seal", "room_KuafuVR" }, { "Goumang Seal", "room_GoumangVR" }, { "Yanlao Seal", "room_YanlaoVR" }, { "Jiequan Seal", "room_JiequanVR" }, { "Fake Lady Ethereal Seal", "room_fakeFudie" }, { "After Lady Ethereal fight", "room_Butterfly" }, { "Ji Seal", "room_JiVR" }, { "Fuxi Seal", "room_FuxiVR" }, { "Nuwa Seal", "room_NuwaVR" }, { "Eigong Soulscape", "room_EigongSoulscape" } };
-
   vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "jiaoduan_kill", 11 },{ "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 }, { "eigong_kill", 104 }, { "trueeigong_kill", 113 } };
   vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" }, { "baichang_kill", "A1_S2_ConnectionToElevator_Final" }, { "xingtian_kill", "A4_S3_ControlRoom_Final" }, { "kanghui_kill", "A5_S2_Jail_Remake_Final" }, { "huanxian_kill", "A7_S2_SectionF_MiniBossFight" }, { "jiaoduan_kill", "A2_S2_ReactorRight_Final" }, { "tianshou_kill", "A9_S1_Remake_4wei" }, { "eigong_kill", "A11_S0_Boss_YiGung" }, { "trueeigong_kill", "A11_S0_Boss_YiGung" }};
   
   // Dictionary where we'll insert all game flags we want to track. 
   vars.gameFlags = new Dictionary<string, Tuple<string, string, string>>();
+
+  // Ability Rooms 
+  vars.gameFlags.Add("d7a7775c-dd94-40af-9a65-bcbc73bcef43_9e73acaa5eb0f4a65bd599ed193c852cScriptableDataBool", Tuple.Create("ability_exit", "Tai Chi Kick Room", "ScriptableDataBool") );
+  vars.gameFlags.Add("a791e2f5-4cfb-4be0-a8aa-cb4344ce5784_ee992f5c8f50b4b0caa5ef6c27d19d4dScriptableDataBool", Tuple.Create("ability_exit", "Charged Strike Room", "ScriptableDataBool") );
+  vars.gameFlags.Add("fcdd31e0-0772-4907-91e9-e27eac5446fe_6c434469f3b6049638220e464708ceafScriptableDataBool", Tuple.Create("ability_exit", "Air Dash Room", "ScriptableDataBool") );
+  vars.gameFlags.Add("8e8f9d2c-8420-4056-8bef-256d981ca747_d9471a64dd55c486bbe604ae326ac961ScriptableDataBool", Tuple.Create("ability_exit", "Unbounded Counter Room", "ScriptableDataBool") );
+  vars.gameFlags.Add("8be2b95b-1b1c-443f-80d3-f488ecb52145_3cf7cd9b3e2c840af8ec10763a0c7fceScriptableDataBool", Tuple.Create("ability_exit", "Double Jump Room", "ScriptableDataBool") );
   
+  // Sols Seals
+  vars.gameFlags.Add("3e29d950db438456f856b339b02af177ItemData", Tuple.Create("seal_obtain", "Kuafu Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("687e430938a164d249d0b3befeb786a3ItemData", Tuple.Create("seal_obtain", "Goumang Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("9391d80ddafa5d74eb3aca1449ed63ecItemData", Tuple.Create("seal_obtain", "Yanlao Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3596ea85d82e7d9419ee710c50c19655ItemData", Tuple.Create("seal_obtain", "Jiequan Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("f54ffa939efda244f9193ffd5379ee99ScriptableDataBool", Tuple.Create("seal_obtain", "Fake Lady Ethereal Seal", "ScriptableDataBool") );
+  vars.gameFlags.Add("7d7086dda1d540f4ab32c919d59ea036ItemData", Tuple.Create("seal_obtain", "Lady Ethereal Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("0218216d41d6441d69da23ea385d9452ItemData", Tuple.Create("seal_obtain", "Ji Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3f04475e7c59f458a850f1725cf8f197ItemData", Tuple.Create("seal_obtain", "Fuxi Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cea7218ddb8b449008101c3ccdc8b50bItemData", Tuple.Create("seal_obtain", "Nuwa Seal", "GameFlagDescriptable") );
+  vars.gameFlags.Add("6146c740-3940-4975-8061-a93726013e17_ab6a52c60b84a4d6fb5a32242f77bad1ScriptableDataBool", Tuple.Create("seal_obtain", "Eigong Soulscape", "ScriptableDataBool") );
+
   // Boss Kills
   vars.gameFlags.Add("740a8b30-e3cc-4acc-9f5f-da3aaae1df5e_51c211e21fecd9e4c92f41d8d72aa395ScriptableDataBool", Tuple.Create("boss_kill", "Red Tiger Elite: Baichang", "ScriptableDataBool") );
   vars.gameFlags.Add("2798b3a9-1026-4d53-b41c-5489699a19de_c3c3f30fb046d9743aea48eb8f4833bcScriptableDataBool", Tuple.Create("boss_kill", "Celestial Sentinel: Jiaoduan", "ScriptableDataBool") );
+  vars.gameFlags.Add("593da1d0fcfe85e45b43c39ccb2c6d19ScriptableDataBool", Tuple.Create("boss_kill", "General: Yingzhao", "ScriptableDataBool") );
   vars.gameFlags.Add("f5b26e3311ce4e84a961dc36a05e19b7ScriptableDataBool", Tuple.Create("boss_kill", "Goumang", "ScriptableDataBool") );
   vars.gameFlags.Add("098316c3b4ddf514fbc2dc2806475da2ScriptableDataBool", Tuple.Create("boss_kill", "Xingtian", "ScriptableDataBool") );
   vars.gameFlags.Add("b500f8ebeb10f46a085b9720f5a78affScriptableDataBool", Tuple.Create("boss_kill", "Kanghui", "ScriptableDataBool") );
@@ -136,6 +152,10 @@ startup
   vars.gameFlags.Add("5c30ad493bbdebc40a2370664d46b830TeleportPointData", Tuple.Create("rootnode_unlock", "Tiandao Research Center", "GameFlagDescriptable") );
   vars.gameFlags.Add("473d9c581cd574f62a36519ae3d451ebTeleportPointData", Tuple.Create("rootnode_unlock", "Tianhuo Research Institute", "GameFlagDescriptable") );
   vars.gameFlags.Add("da6613d2c8f7e4eb6ae1b4d0fe7fee93TeleportPointData", Tuple.Create("rootnode_unlock", "New Kunlun Control Hub", "GameFlagDescriptable") );
+
+  // Map Unlock
+  vars.gameFlags.Add("135eb5244f8364f5d9d2730cdcf1baf6GameLevelMapData", Tuple.Create("map_unlock", "Empyrean Dist. (Sanctum)", "GameLevelMapData") );
+  vars.gameFlags.Add("88a9cc79311d449cebea7eb27e1a1593GameLevelMapData", Tuple.Create("map_unlock", "New Kunlun Control Hub", "GameLevelMapData") );
   
   settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
@@ -145,22 +165,16 @@ startup
   foreach (var ability in vars.abilities) { 
     settings.Add(ability.Value, false, ability.Key, "ability_obtain"); 
   }
-  settings.Add("ability_exit", false, "Split on exiting Ability tutorial maps");
-  foreach (var abilityroom in vars.abilityrooms) { 
-    settings.Add(abilityroom.Value, false, abilityroom.Key, "ability_exit"); 
-  }
 
-  settings.Add("seal_obtain", false, "Split on exiting a Sol's Soulscape room");
-  foreach (var vrmemory in vars.vrmemory) { 
-    settings.Add(vrmemory.Value, false, vrmemory.Key, "seal_obtain"); 
-  }
-  
   // Add settings groupings for flags
-  settings.Add("boss_kill", false, "Split on Boss Kill (experimental)");
-  settings.Add("jade_obtain", false, "Split on obtaining a jade (experimental)");
-  settings.Add("artifact_obtain", false, "Split on obtaining an artifact (experimental)");
-  settings.Add("poison_obtain", false, "Split on obtaining a poison (experimental)");
-  settings.Add("rootnode_unlock", false, "Split on unlocking a root node (experimental)");
+  settings.Add("ability_exit", false, "Split on exiting Ability tutorial maps");
+  settings.Add("seal_obtain", false, "Split on exiting a Sol's Soulscape room");
+  settings.Add("boss_kill", false, "Split on Boss Kill");
+  settings.Add("jade_obtain", false, "Split on obtaining a jade");
+  settings.Add("artifact_obtain", false, "Split on obtaining an artifact");
+  settings.Add("poison_obtain", false, "Split on obtaining a poison");
+  settings.Add("rootnode_unlock", false, "Split on unlocking a root node");
+  settings.Add("map_unlock", false, "Split on entering a new area (experimental)");
   
   // Add individual flag settings
   foreach (var flagEntry in vars.gameFlags) {
@@ -231,6 +245,15 @@ init
                   
                vars.FoundFlags.Add(finalSaveID);
             }
+            else if (className == "GameLevelMapData") {
+               //GameLevelMapData.unlocked
+               IntPtr unlockedFieldPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x68);
+                  
+               //GameLevelMapData.unlocked._currentValue;
+               vars.Helper[finalSaveID] = vars.Helper.Make<bool>(unlockedFieldPtr + 0x3a);
+                  
+               vars.FoundFlags.Add(finalSaveID);
+            }
          }
       }
       
@@ -284,28 +307,6 @@ reset
 
 
 split {
-    if (old.SceneIndex != current.SceneIndex) {
-      foreach (var abilityroom in vars.abilityrooms) {
-      /* Split on exiting ability rooms*/
-        if (vars.roomIndexes[abilityroom.Value] == old.SceneIndex || vars.roomNames[abilityroom.Value] == old.Scene) {
-          print("splitting for: " + abilityroom);
-          if(settings[abilityroom.Value]) {
-            return vars.CompletedSplits.Add(abilityroom.Value);
-          }
-        }
-      }
-      /* Split on exiting VR memory rooms*/
-      foreach (var vrmemory in vars.vrmemory) {
-          if (vars.roomIndexes[vrmemory.Value] == old.SceneIndex || vars.roomNames[vrmemory.Value] == old.Scene)
-          {
-            print("splitting for: " + vrmemory);
-            if(settings[vrmemory.Value]) {
-              return vars.CompletedSplits.Add(vrmemory.Value);
-            }
-          }
-      }
-    }
-
     /* Split on Ability obtain (on the first triggers) */ 
     foreach (var ability in vars.abilities) {
       if (vars.Helper[ability.Value].Current != vars.Helper[ability.Value].Old) {
