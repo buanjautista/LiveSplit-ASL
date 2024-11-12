@@ -309,23 +309,27 @@ reset
 split {
     /* Split on Ability obtain (on the first triggers) */ 
     foreach (var ability in vars.abilities) {
-      if (vars.Helper[ability.Value].Current != vars.Helper[ability.Value].Old) {
-        print("splitting for: " + ability);
-        if(settings[ability.Value]) {
-          return vars.CompletedSplits.Add(ability.Value);
+      if(settings[ability.Value] && !vars.CompletedSplits.Contains(ability.Value)) {
+        if (vars.Helper[ability.Value].Current) {
+          print("splitting for: " + ability);
+          vars.CompletedSplits.Add(ability.Value);
+          return true;
         }
       }
     }
     
     /* Split on Game Flag being set */
     foreach (var saveFlagID in vars.FoundFlags) {
-      if (vars.Helper[saveFlagID].Current != vars.Helper[saveFlagID].Old) {
-        print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
-        if(settings[saveFlagID]) {
-          return vars.CompletedSplits.Add(saveFlagID);
+      if (settings[saveFlagID] && !vars.CompletedSplits.Contains(saveFlagID)) {
+        if (vars.Helper[saveFlagID].Current) {
+          print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
+          vars.CompletedSplits.Add(saveFlagID);
+          return true;
         }
       }
     }
+
+    return false;
 }
 /*
 Scenes:
