@@ -307,24 +307,29 @@ reset
 
 
 split {
-    /* Split on Ability obtain (on the first triggers) */ 
-    foreach (var ability in vars.abilities) {
-      if(settings[ability.Value] && !vars.CompletedSplits.Contains(ability.Value)) {
-        if (vars.Helper[ability.Value].Current) {
-          print("splitting for: " + ability);
-          vars.CompletedSplits.Add(ability.Value);
-          return true;
+    // Don't trigger any splits that check game flags when we're on the main menu
+    // These flags could contain values from previously loaded saves, resulting in splits being triggered when starting a run
+    if(current.SceneIndex != 1)
+    {
+      /* Split on Ability obtain (on the first triggers) */ 
+      foreach (var ability in vars.abilities) {
+        if(settings[ability.Value] && !vars.CompletedSplits.Contains(ability.Value)) {
+          if (vars.Helper[ability.Value].Current) {
+            print("splitting for: " + ability);
+            vars.CompletedSplits.Add(ability.Value);
+            return true;
+          }
         }
       }
-    }
     
-    /* Split on Game Flag being set */
-    foreach (var saveFlagID in vars.FoundFlags) {
-      if (settings[saveFlagID] && !vars.CompletedSplits.Contains(saveFlagID)) {
-        if (vars.Helper[saveFlagID].Current) {
-          print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
-          vars.CompletedSplits.Add(saveFlagID);
-          return true;
+      /* Split on Game Flag being set */
+      foreach (var saveFlagID in vars.FoundFlags) {
+        if (settings[saveFlagID] && !vars.CompletedSplits.Contains(saveFlagID)) {
+          if (vars.Helper[saveFlagID].Current) {
+            print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
+            vars.CompletedSplits.Add(saveFlagID);
+            return true;
+          }
         }
       }
     }
