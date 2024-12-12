@@ -10,8 +10,8 @@ startup
   vars.CompletedSplits = new HashSet<string>();
   vars.abilities = new Dictionary<string, string> { { "Mystic Nymph", "skills_HackDroneAbility" }, { "Tai Chi Counter", "skills_ParryJumpKickAbility" }, { "Azure Bow", "skills_ArrowAbility" }, { "Charged Strike", "skills_ChargedAttackAbility" }, { "Air Dash", "skills_RollDodgeInAirUpgrade" }, { "Unbounded Counter", "skills_ParryCounterAbility" }, { "Double Jump", "skills_AirJumpAbility" }, { "Super Mutant Buster", "skills_KillZombieFooAbility" } };
 
-  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "jiaoduan_kill", 11 },{ "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 }, { "eigong_kill", 104 }, { "trueeigong_kill", 113 } };
-  vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" }, { "baichang_kill", "A1_S2_ConnectionToElevator_Final" }, { "xingtian_kill", "A4_S3_ControlRoom_Final" }, { "kanghui_kill", "A5_S2_Jail_Remake_Final" }, { "huanxian_kill", "A7_S2_SectionF_MiniBossFight" }, { "jiaoduan_kill", "A2_S2_ReactorRight_Final" }, { "tianshou_kill", "A9_S1_Remake_4wei" }, { "eigong_kill", "A11_S0_Boss_YiGung" }, { "trueeigong_kill", "A11_S0_Boss_YiGung" }};
+  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "jiaoduan_kill", 11 },{ "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 }, { "eigong_kill", 104 }, { "trueeigong_kill", 113 }, { "mob_hub", 116 } };
+  vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" }, { "baichang_kill", "A1_S2_ConnectionToElevator_Final" }, { "xingtian_kill", "A4_S3_ControlRoom_Final" }, { "kanghui_kill", "A5_S2_Jail_Remake_Final" }, { "huanxian_kill", "A7_S2_SectionF_MiniBossFight" }, { "jiaoduan_kill", "A2_S2_ReactorRight_Final" }, { "tianshou_kill", "A9_S1_Remake_4wei" }, { "eigong_kill", "A11_S0_Boss_YiGung" }, { "trueeigong_kill", "A11_S0_Boss_YiGung" }, { "mob_hub", "VR_Challenge_Hub" }};
   
   // Dictionary where we'll insert all game flags we want to track. 
   vars.gameFlags = new Dictionary<string, Tuple<string, string, string>>();
@@ -156,10 +156,17 @@ startup
   // Map Unlock
   vars.gameFlags.Add("135eb5244f8364f5d9d2730cdcf1baf6GameLevelMapData", Tuple.Create("map_unlock", "Empyrean Dist. (Sanctum)", "GameLevelMapData") );
   vars.gameFlags.Add("88a9cc79311d449cebea7eb27e1a1593GameLevelMapData", Tuple.Create("map_unlock", "New Kunlun Control Hub", "GameLevelMapData") );
+
+  // Cutscenes or events
+  vars.gameFlags.Add("f1c9ab9f-0e22-4105-8267-54e4b2a68572_93653f615d5940a409fffdcecb72ec43ScriptableDataBool", Tuple.Create("map_unlock", "Lady Ethereal Butterfly segment", "ScriptableDataBool") );
   
-  settings.Add("mainmenu_reset", false, "Reset on Main Menu");
+  // settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
+  // settings.Add("memories_start", false, "Start on Memories of Battle boss");
+  // settings.SetToolTip("fileselect_start", "For starting timer when starting a boss fight in Memories of Battle mode");
+  // settings.Add("memories_reset", false, "Reset on Memories of Battle hub");
+  // settings.SetToolTip("fileselect_start", "For resetting timer when going back to Memories of Battle hub");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -191,12 +198,14 @@ init
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
       var SaveManager = mono["SaveManager",1];
+      // var MonsterManager = mono["MonsterManager",1];
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
-      vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load
+      // vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load, currently not in use
       vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
       // vars.Helper["seamlessload"] = GameCore.Make<bool>("_instance","_currentSeamlessConnectionPoint",0x48); 
 
+      // vars.Helper["memories_start"] = SaveManager.Make<bool>("_instance","savingIcon",0x28); 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
       vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
@@ -267,6 +276,7 @@ start {
   ) { 
     return vars.Helper["savefilestart"].Current; 
   }
+
   else {
       /* Start timer when intro cutscene begins */ 
       if ((old.SceneIndex != current.SceneIndex) && (current.SceneIndex == 7))
@@ -282,9 +292,8 @@ onStart {
 
 isLoading
 {
-  /* (vars.Helper["gamestate"] == 2) is changing scenes, in case needed to rewrite this */ 
+  // || (!vars.Helper["levelloading"].Current)  was causing issues, leaving as comment in case we need it again  
   return (vars.Helper["loadingscreen"].Current 
-  || (!vars.Helper["levelloading"].Current) 
   || (vars.Helper["gamestate"].Current == 0)  
   || (vars.Helper["gamestate"].Current == 2) 
   || (current.SceneIndex == 0)
@@ -300,10 +309,11 @@ update
   //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }
 }
 
-reset 
-{
-  if (settings["mainmenu_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 1) { return true; }
-}
+// reset 
+// {
+//   if (settings["mainmenu_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 1) { return true; }
+//   if (settings["memories_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 116) { return true; }
+// }
 
 
 split {
