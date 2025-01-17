@@ -7,6 +7,8 @@ startup
   vars.Helper.LoadSceneManager = true;
   vars.Helper.AlertLoadless();
 
+  vars.lastCheckedSceneIndexForMOBStart = -1;
+
   vars.CompletedSplits = new HashSet<string>();
   vars.abilities = new Dictionary<string, string> { { "Mystic Nymph", "skills_HackDroneAbility" }, { "Tai Chi Counter", "skills_ParryJumpKickAbility" }, { "Azure Bow", "skills_ArrowAbility" }, { "Charged Strike", "skills_ChargedAttackAbility" }, { "Air Dash", "skills_RollDodgeInAirUpgrade" }, { "Unbounded Counter", "skills_ParryCounterAbility" }, { "Double Jump", "skills_AirJumpAbility" }, { "Super Mutant Buster", "skills_KillZombieFooAbility" } };
     
@@ -166,9 +168,9 @@ startup
   settings.Add("fileselect_start", false, "Start on existing Save");
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
   settings.Add("memories_start", false, "Start on Memories of Battle boss");
-  settings.SetToolTip("fileselect_start", "For starting timer when starting a boss fight in Memories of Battle mode");
+  settings.SetToolTip("memories_start", "For starting timer when starting a boss fight in Memories of Battle mode");
   // settings.Add("memories_reset", false, "Reset on Memories of Battle hub");
-  // settings.SetToolTip("fileselect_start", "For resetting timer when going back to Memories of Battle hub");
+  // settings.SetToolTip("memories_reset", "For resetting timer when going back to Memories of Battle hub");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -292,6 +294,22 @@ init
 }
 
 start {
+  if(vars.Helper["MemoriesOfBattleFlag"].Current && settings["memories_start"])
+  {
+    // Only trigger start when the scene has changed
+    // Don't trigger the start if the last scene index is set to -1, this means we just entered the game or reset the timer.
+    if(vars.lastCheckedSceneIndexForMOBStart != -1 && vars.lastCheckedSceneIndexForMOBStart != current.SceneIndex) {
+      foreach (var boss in vars.memoriesOfBattleBosses) {
+        if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
+          vars.lastCheckedSceneIndexForMOBStart = -1; //Reset this now so that it's set to 0 when we next reset the timer
+          return true;
+        }
+      }
+    }
+
+    vars.lastCheckedSceneIndexForMOBStart = current.SceneIndex;
+  }
+
   if (settings["fileselect_start"] 
     && (vars.Helper["savefilestart"].Current != vars.Helper["savefilestart"].Old)
   ) { 
@@ -373,11 +391,6 @@ split {
         foreach (var boss in vars.memoriesOfBattleBosses) {
           if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
             if (settings[boss.Value] && !vars.CompletedSplits.Contains(boss.Value)) {
-            
-              //Only split if on the correct phase    TODO: Why is this necessary?
-              //if ((boss.Value == "eigong_kill" && vars.Helper["PhaseIndex"].Current < 1) || (boss.Value == "kanghui_kill" && vars.Helper["PhaseIndex"].Current < 2)) {
-              //  return false;
-              //}
               print("splitting for: " + boss);
               vars.CompletedSplits.Add(boss.Value);
               return true;
