@@ -7,10 +7,14 @@ startup
   vars.Helper.LoadSceneManager = true;
   vars.Helper.AlertLoadless();
 
+  vars.lastCheckedSceneIndexForMOBStart = -1;
+
   vars.CompletedSplits = new HashSet<string>();
   vars.abilities = new Dictionary<string, string> { { "Mystic Nymph", "skills_HackDroneAbility" }, { "Tai Chi Counter", "skills_ParryJumpKickAbility" }, { "Azure Bow", "skills_ArrowAbility" }, { "Charged Strike", "skills_ChargedAttackAbility" }, { "Air Dash", "skills_RollDodgeInAirUpgrade" }, { "Unbounded Counter", "skills_ParryCounterAbility" }, { "Double Jump", "skills_AirJumpAbility" }, { "Super Mutant Buster", "skills_KillZombieFooAbility" } };
-
-  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "jiaoduan_kill", 11 },{ "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 }, { "eigong_kill", 104 }, { "trueeigong_kill", 113 }, { "mob_hub", 116 } };
+    
+  vars.memoriesOfBattleBosses = new Dictionary<string, string> { { "Kuafu", "room_kuafu" }, { "Goumang", "room_goumang" },{ "Yanlao", "room_yanlao" }, { "Jiequan", "room_jiequan" }, { "Lady Ethereal", "room_ladyethereal" }, { "Ji", "room_ji" },{ "Fuxi & Nuwa", "room_fuxi" }, { "Eigong", "room_eigong" } };
+  
+  vars.roomIndexes = new Dictionary<string,int> { { "room_KuafuVR", 66 }, { "room_GoumangVR", 67 }, { "room_YanlaoVR", 68 }, { "room_JiequanVR", 69 }, { "room_fakeFudie", 70 }, { "room_Butterfly", 52 },{ "room_JiVR", 89 }, { "room_FuxiVR", 90 }, { "room_NuwaVR", 91 }, { "room_EigongSoulscape", 103 }, { "room_Taichi", 58 }, { "room_Charged", 59 }, { "room_Airdash", 60 }, { "room_Unbounded", 61 }, { "room_DoubleJump", 63 }, { "baichang_kill", 9 }, { "jiaoduan_kill", 11 },{ "xingtian_kill", 27 }, { "kanghui_kill", 37 }, { "huanxian_kill", 49 }, { "tianshou_kill", 64 },{ "room_kuafu", 14 }, { "room_goumang", 21 },{ "room_yanlao", 29 }, { "room_jiequan", 41 }, { "room_ladyethereal", 51 }, { "room_ji", 88 },{ "room_fuxi", 97 }, { "room_eigong", 104 }, { "trueeigong_kill", 113 }, { "mob_hub", 116 } };
   vars.roomNames = new Dictionary<string,string> { { "room_KuafuVR", "VR_Memory_Kuafu" }, { "room_GoumangVR", "VR_Memory_Goumang" }, { "room_YanlaoVR", "VR_Memory_TaoChang" }, { "room_JiequanVR", "VR_Memory_JieChuan" }, { "room_fakeFudie", "VR_Memory_FuDie" }, { "room_Butterfly", "A7_S6_Memory_Butterfly_CutScene" },{ "room_JiVR", "VR_Memory_Jee" }, { "room_FuxiVR", "VR_Memory_伏羲" }, { "room_NuwaVR", "VR_Memory_伏羲&女娲" }, { "room_EigongSoulscape", "VR_Memory_易公" }, { "room_Taichi", "AG_Tutorial_Lear_S2_??JumpKick" }, { "room_Charged", "AG_Tutorial_Lear_S3_??ChargeAttack" }, { "room_Airdash", "AG_Tutorial_Lear_S4_AirDash_????" }, { "room_Unbounded", "AG_Tutorial_Lear_S5_??ChargedParry" }, { "room_DoubleJump", "AG_Tutorial_Lear_S7_DoubleJump_???" }, { "baichang_kill", "A1_S2_ConnectionToElevator_Final" }, { "xingtian_kill", "A4_S3_ControlRoom_Final" }, { "kanghui_kill", "A5_S2_Jail_Remake_Final" }, { "huanxian_kill", "A7_S2_SectionF_MiniBossFight" }, { "jiaoduan_kill", "A2_S2_ReactorRight_Final" }, { "tianshou_kill", "A9_S1_Remake_4wei" }, { "eigong_kill", "A11_S0_Boss_YiGung" }, { "trueeigong_kill", "A11_S0_Boss_YiGung" }, { "mob_hub", "VR_Challenge_Hub" }};
   
   // Dictionary where we'll insert all game flags we want to track. 
@@ -163,10 +167,10 @@ startup
   // settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
-  // settings.Add("memories_start", false, "Start on Memories of Battle boss");
-  // settings.SetToolTip("fileselect_start", "For starting timer when starting a boss fight in Memories of Battle mode");
+  settings.Add("memories_start", false, "Start on Memories of Battle boss");
+  settings.SetToolTip("memories_start", "For starting timer when starting a boss fight in Memories of Battle mode");
   // settings.Add("memories_reset", false, "Reset on Memories of Battle hub");
-  // settings.SetToolTip("fileselect_start", "For resetting timer when going back to Memories of Battle hub");
+  // settings.SetToolTip("memories_reset", "For resetting timer when going back to Memories of Battle hub");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -181,11 +185,16 @@ startup
   settings.Add("artifact_obtain", false, "Split on obtaining an artifact");
   settings.Add("poison_obtain", false, "Split on obtaining a poison");
   settings.Add("rootnode_unlock", false, "Split on unlocking a root node");
-  settings.Add("map_unlock", false, "Split on entering a new area (experimental)");
+  settings.Add("map_unlock", false, "Split on entering a new area");
   
   // Add individual flag settings
   foreach (var flagEntry in vars.gameFlags) {
     settings.Add(flagEntry.Key, false, flagEntry.Value.Item2, flagEntry.Value.Item1);
+  }
+
+  settings.Add("mob_kill", false, "Split on Battle Memories Boss Kill");
+  foreach (var boss in vars.memoriesOfBattleBosses) { 
+    settings.Add(boss.Value, false, boss.Key, "mob_kill"); 
   }
 }
 
@@ -219,6 +228,11 @@ init
       vars.Helper["skills_ParryCounterAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x100,0x17a); 
       vars.Helper["skills_AirJumpAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x108,0x17a); 
       vars.Helper["skills_KillZombieFooAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x118,0x17a); 
+             
+      /* Boss States */ 
+      vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
+      vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
+
        
        /* Flags */
       var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
@@ -264,6 +278,15 @@ init
                vars.FoundFlags.Add(finalSaveID);
             }
          }
+         
+         // Special case: Store the flag that tells us if we're currently in Memories of Battle
+         if(finalSaveID == "3173df12f14fc4862bf4588193b8cfc3ScriptableDataBool") { 
+               //ScriptableDataBool.field
+               IntPtr fieldPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x38);
+                  
+               //ScriptableDataBool.field._currentValue;
+               vars.Helper["MemoriesOfBattleFlag"] = vars.Helper.Make<bool>(fieldPtr + 0x3a);
+         }
       }
       
       return true;
@@ -271,6 +294,22 @@ init
 }
 
 start {
+  if(vars.Helper["MemoriesOfBattleFlag"].Current && settings["memories_start"])
+  {
+    // Only trigger start when the scene has changed
+    // Don't trigger the start if the last scene index is set to -1, this means we just entered the game or reset the timer.
+    if(vars.lastCheckedSceneIndexForMOBStart != -1 && vars.lastCheckedSceneIndexForMOBStart != current.SceneIndex) {
+      foreach (var boss in vars.memoriesOfBattleBosses) {
+        if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
+          vars.lastCheckedSceneIndexForMOBStart = -1; //Reset this now so that it's set to 0 when we next reset the timer
+          return true;
+        }
+      }
+    }
+
+    vars.lastCheckedSceneIndexForMOBStart = current.SceneIndex;
+  }
+
   if (settings["fileselect_start"] 
     && (vars.Helper["savefilestart"].Current != vars.Helper["savefilestart"].Old)
   ) { 
@@ -339,6 +378,23 @@ split {
             print("splitting for flag: " + vars.gameFlags[saveFlagID].Item1 + " - " + vars.gameFlags[saveFlagID].Item2);
             vars.CompletedSplits.Add(saveFlagID);
             return true;
+          }
+        }
+      }
+    }
+
+    
+    /* Split on Memories of Battle Boss Kill (experimental)
+      This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
+    if(vars.Helper["MemoriesOfBattleFlag"].Current) {
+      if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
+        foreach (var boss in vars.memoriesOfBattleBosses) {
+          if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
+            if (settings[boss.Value] && !vars.CompletedSplits.Contains(boss.Value)) {
+              print("splitting for: " + boss);
+              vars.CompletedSplits.Add(boss.Value);
+              return true;
+            }
           }
         }
       }
