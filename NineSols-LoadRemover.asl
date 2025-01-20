@@ -8,6 +8,7 @@ startup
   vars.Helper.AlertLoadless();
 
   vars.lastCheckedSceneIndexForMOBStart = -1;
+  vars.mobFlagExists = false;
 
   vars.CompletedSplits = new HashSet<string>();
   vars.abilities = new Dictionary<string, string> { { "Mystic Nymph", "skills_HackDroneAbility" }, { "Tai Chi Counter", "skills_ParryJumpKickAbility" }, { "Azure Bow", "skills_ArrowAbility" }, { "Charged Strike", "skills_ChargedAttackAbility" }, { "Air Dash", "skills_RollDodgeInAirUpgrade" }, { "Unbounded Counter", "skills_ParryCounterAbility" }, { "Double Jump", "skills_AirJumpAbility" }, { "Super Mutant Buster", "skills_KillZombieFooAbility" } };
@@ -286,6 +287,7 @@ init
                   
                //ScriptableDataBool.field._currentValue;
                vars.Helper["MemoriesOfBattleFlag"] = vars.Helper.Make<bool>(fieldPtr + 0x3a);
+               vars.mobFlagExists = true;
          }
       }
       
@@ -294,8 +296,7 @@ init
 }
 
 start {
-  if(vars.Helper["MemoriesOfBattleFlag"].Current && settings["memories_start"])
-  {
+  if(settings["memories_start"] && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
     // Only trigger start when the scene has changed
     // Don't trigger the start if the last scene index is set to -1, this means we just entered the game or reset the timer.
     if(vars.lastCheckedSceneIndexForMOBStart != -1 && vars.lastCheckedSceneIndexForMOBStart != current.SceneIndex) {
@@ -386,7 +387,7 @@ split {
     
     /* Split on Memories of Battle Boss Kill (experimental)
       This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
-    if(vars.Helper["MemoriesOfBattleFlag"].Current) {
+    if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
       if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
         foreach (var boss in vars.memoriesOfBattleBosses) {
           if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
