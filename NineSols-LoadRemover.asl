@@ -207,6 +207,7 @@ init
    {
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
+      var ApplicationUIGroupManager = mono["ApplicationUIGroupManager", 1];
       var SaveManager = mono["SaveManager",1];
       // var MonsterManager = mono["MonsterManager",1];
 
@@ -219,6 +220,8 @@ init
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
       vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
+      
+      vars.Helper["blackCoverOpacity"] = ApplicationUIGroupManager.Make<float>("_instance", "blackCover", 0x70 + 0xc); // ApplicationUIGroupManager.blackCover.m_color.a
 
       /* Skills */ 
       vars.Helper["skills_HackDroneAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0xf8,0x17a); 
@@ -338,7 +341,8 @@ isLoading
   || (vars.Helper["gamestate"].Current == 2) 
   || (current.SceneIndex == 0)
   || (current.SceneIndex == 72) 
-  || (current.SceneIndex == 7));
+  || (current.SceneIndex == 7)
+  || (current.SceneIndex == 1 && vars.Helper["blackCoverOpacity"].Current > 0.99f));
 }
 
 update
