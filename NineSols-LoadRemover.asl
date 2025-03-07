@@ -170,8 +170,8 @@ startup
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
   settings.Add("memories_start", false, "Start on Memories of Battle boss");
   settings.SetToolTip("memories_start", "For starting timer when starting a boss fight in Memories of Battle mode");
-  // settings.Add("memories_reset", false, "Reset on Memories of Battle hub");
-  // settings.SetToolTip("memories_reset", "For resetting timer when going back to Memories of Battle hub");
+  settings.Add("memories_reset", false, "Reset on Memories of Battle retry");
+  settings.SetToolTip("memories_reset", "For resetting timer when dying or retry in Memories of Battle");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -203,7 +203,13 @@ init
 {
   current.SceneIndex = 0;
   current.Scene = "";
-   vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
+  current.bossPostureSystem = 0;
+  current.bossHPBar = 0;
+  current.bossPhase = 0;
+
+  current.JiFix = false;
+
+  vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
    {
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
@@ -214,7 +220,7 @@ init
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
       // vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load, currently not in use
       vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
-      // vars.Helper["seamlessload"] = GameCore.Make<bool>("_instance","_currentSeamlessConnectionPoint",0x48); 
+      vars.Helper["YiHP"] = GameCore.Make<float>("_instance","player",0x470,0x94); 
 
       // vars.Helper["memories_start"] = SaveManager.Make<bool>("_instance","savingIcon",0x28); 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
@@ -235,8 +241,9 @@ init
              
       /* Boss States */ 
       vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
-      vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
+      // vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
 
+      vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
        
        /* Flags */
       var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
@@ -302,6 +309,7 @@ start {
   if(settings["memories_start"] && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
     // Only trigger start when the scene has changed
     // Don't trigger the start if the last scene index is set to -1, this means we just entered the game or reset the timer.
+    /*
     if(vars.lastCheckedSceneIndexForMOBStart != -1 && vars.lastCheckedSceneIndexForMOBStart != current.SceneIndex) {
       foreach (var boss in vars.memoriesOfBattleBosses) {
         if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
@@ -310,8 +318,22 @@ start {
         }
       }
     }
+    vars.lastCheckedSceneIndexForMOBStart = current.SceneIndex; 
+    */
 
-    vars.lastCheckedSceneIndexForMOBStart = current.SceneIndex;
+    // If the BossHPList is not empty, get the current boss HP on fight start to trigger auto-start for ILs
+    if (vars.Helper["bossHPUIList"].Current.Count != vars.Helper["bossHPUIList"].Old.Count 
+        && vars.Helper["bossHPUIList"].Current.Count >= vars.Helper["bossHPUIList"].Old.Count) { 
+
+      // Cheap fix for Ji fight auto-start
+      if (current.SceneIndex == 0 && current.JiFix == false) {
+        current.JiFix = true;
+        return false;
+      }
+
+      print("START MOB: " +  vars.Helper["bossHPUIList"].Current.Count + " - " + vars.Helper["bossHPUIList"].Old.Count);
+      return true;
+    }
   }
 
   if (settings["fileselect_start"] 
@@ -331,6 +353,7 @@ start {
 
 onStart {
   vars.CompletedSplits.Clear();
+  current.JiFix = false;
 }
 
 isLoading
@@ -348,16 +371,40 @@ isLoading
 update
 {
   current.SceneIndex = vars.Helper.Scenes.Active.Index;
-  current.Scene = vars.Helper.Scenes.Active.Name;
+  if (vars.Helper["bossHPUIList"].Current.Count != vars.Helper["bossHPUIList"].Old.Count) { 
+    print("Boss State: " +  vars.Helper["bossHPUIList"].Current.Count + " - " + vars.Helper["bossHPUIList"].Old.Count);
+  }
 
-  //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }
+  // dirty fix for Ji autostart
+  if(old.SceneIndex != current.SceneIndex && current.SceneIndex == 88) { current.JiFix = false; }  
+
+  // Go through the boss HP list and store the current posture system HP value
+  // GameCore -> UIMonsterHPManager -> bossHPList<UIBossHP> (destruct)
+  foreach(IntPtr BossHPUI in vars.Helper["bossHPUIList"].Current) {
+    IntPtr BossPosture = vars.Helper.Read<IntPtr>(BossHPUI + 0x70);
+    current.bossHPBar = vars.Helper.Read<float>(BossHPUI + 0xa4);
+
+    // UIBossHP -> PostureSystem -> _value
+    current.bossPostureSystem = vars.Helper.Read<float>(BossPosture + 0x94);
+
+    // UIBossHP -> PostureSystem -> bindMonster (MonsterBase) -> phaseIndex
+    current.bossPhase = vars.Helper.Read<int>(BossPosture + 0x30 + 0x448);
+  }
+  if (current.bossPostureSystem != old.bossPostureSystem) {
+    print("Boss HP Change: " + old.bossPostureSystem + " -> " + current.bossPostureSystem + " - Phase: " + current.bossPhase);
+  }
 }
 
-// reset 
-// {
+reset 
+{
 //   if (settings["mainmenu_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 1) { return true; }
-//   if (settings["memories_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 116) { return true; }
-// }
+
+  // Reset on retry for ILs
+  if (settings["memories_reset"] && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current && vars.Helper["YiHP"].Current <= 0) { 
+    print("Yi HP: " +  vars.Helper["YiHP"].Current);    
+    return true; 
+  }
+}
 
 
 split {
