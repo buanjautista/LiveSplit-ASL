@@ -171,7 +171,7 @@ startup
   settings.Add("memories_start", false, "Start on Memories of Battle boss");
   settings.SetToolTip("memories_start", "For starting timer when starting a boss fight in Memories of Battle mode");
   settings.Add("memories_reset", false, "Reset on Memories of Battle retry");
-  settings.SetToolTip("memories_reset", "For resetting timer when dying or retry in Memories of Battle");
+  settings.SetToolTip("memories_reset", "For resetting timer when dying or pressing Retry in Memories of Battle (ILs)");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -215,6 +215,7 @@ init
       var GameCore = mono["GameCore",1];
       var ApplicationUIGroupManager = mono["ApplicationUIGroupManager", 1];
       var SaveManager = mono["SaveManager",1];
+      var CameraManager = mono["CameraManager",1];
       // var MonsterManager = mono["MonsterManager",1];
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
@@ -222,7 +223,6 @@ init
       vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
       vars.Helper["YiHP"] = GameCore.Make<float>("_instance","player",0x470,0x94); 
 
-      // vars.Helper["memories_start"] = SaveManager.Make<bool>("_instance","savingIcon",0x28); 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
       vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
@@ -244,6 +244,9 @@ init
       // vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
 
       vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
+      
+      vars.Helper["cameraHighlightTime"] = CameraManager.Make<float>("_instance", "currentCameraCore", 0xcc); 
+      vars.Helper["cameraHighlight"] = CameraManager.Make<bool>("_instance", "currentCameraCore", 0xb0, 0x20); 
        
        /* Flags */
       var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
@@ -393,6 +396,13 @@ update
   if (current.bossPostureSystem != old.bossPostureSystem) {
     print("Boss HP Change: " + old.bossPostureSystem + " -> " + current.bossPostureSystem + " - Phase: " + current.bossPhase);
   }
+
+  if (vars.Helper["cameraHighlight"].Current != vars.Helper["cameraHighlight"].Old)  {
+    print(vars.Helper["cameraHighlight"].Current + " time: " + vars.Helper["cameraHighlightTime"].Current);
+  }
+  if (vars.Helper["cameraHighlightTime"].Current != vars.Helper["cameraHighlightTime"].Old && vars.Helper["cameraHighlightTime"].Current > 1.95)  {
+    print("Time: " + vars.Helper["cameraHighlightTime"].Current + " splitting at boss hp: " + current.bossPostureSystem);
+  }
 }
 
 reset 
@@ -437,9 +447,10 @@ split {
 
     
     /* Split on Memories of Battle Boss Kill (experimental)
-      This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
+      Camera LastHitHighlight is the black and white effect on kill, and its time is set to 2f when the effect goes on screen. It has a HighlightCamera.enabled property i havent seen how to obtain yet.
+      This would grab that duration as the trigger and also check if the boss has less than 1 HP for certain cases where it ends at less than 0.5 HP and fully dies after the black and white */
     if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
-      if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
+      if (vars.Helper["cameraHighlightTime"].Current != vars.Helper["cameraHighlightTime"].Old && vars.Helper["cameraHighlightTime"].Current > 1.95 && current.bossPostureSystem <= 1)  {
         foreach (var boss in vars.memoriesOfBattleBosses) {
           if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
             if (settings[boss.Value] && !vars.CompletedSplits.Contains(boss.Value)) {
