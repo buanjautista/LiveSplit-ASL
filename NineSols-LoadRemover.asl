@@ -158,12 +158,76 @@ startup
   vars.gameFlags.Add("473d9c581cd574f62a36519ae3d451ebTeleportPointData", Tuple.Create("rootnode_unlock", "Tianhuo Research Institute", "GameFlagDescriptable") );
   vars.gameFlags.Add("da6613d2c8f7e4eb6ae1b4d0fe7fee93TeleportPointData", Tuple.Create("rootnode_unlock", "New Kunlun Control Hub", "GameFlagDescriptable") );
 
-  // Map Unlock
-  vars.gameFlags.Add("135eb5244f8364f5d9d2730cdcf1baf6GameLevelMapData", Tuple.Create("map_unlock", "Empyrean Dist. (Sanctum)", "GameLevelMapData") );
-  vars.gameFlags.Add("88a9cc79311d449cebea7eb27e1a1593GameLevelMapData", Tuple.Create("map_unlock", "New Kunlun Control Hub", "GameLevelMapData") );
+  // Map Unlock:  Apeman Facility
+  vars.gameFlags.Add("8f7933bdb493346fbabe65c6f29c76b6GameLevelMapData", Tuple.Create("map_unlock_apeman", "Apeman Facility (Monitoring)", "GameLevelMapData") );
+  vars.gameFlags.Add("7ca1bdfe0f0ba4252b922f03a614cd29GameLevelMapData", Tuple.Create("map_unlock_apeman", "Apeman Facility (Elevator)", "GameLevelMapData") );
+  vars.gameFlags.Add("b0ef27248fa9b5449ae2652773568edaGameLevelMapData", Tuple.Create("map_unlock_apeman", "Apeman Facility (Depths)", "GameLevelMapData") );
 
-  // Cutscenes or events
-  vars.gameFlags.Add("f1c9ab9f-0e22-4105-8267-54e4b2a68572_93653f615d5940a409fffdcecb72ec43ScriptableDataBool", Tuple.Create("map_unlock", "Lady Ethereal Butterfly segment", "ScriptableDataBool") );
+  // Map Unlock:  New Kunlun Hub
+  vars.gameFlags.Add("28cc855e19c274a9b838cfa9a73868feGameLevelMapData", Tuple.Create("map_unlock_hub", "New Kunlun Central Hall", "GameLevelMapData") );
+  vars.gameFlags.Add("1d24fc87063235c40b83b837dcab39a5GameLevelMapData", Tuple.Create("map_unlock_hub", "Four Seasons Pavilion", "GameLevelMapData") );
+  vars.gameFlags.Add("88a9cc79311d449cebea7eb27e1a1593GameLevelMapData", Tuple.Create("map_unlock_hub", "New Kunlun Control Hub", "GameLevelMapData") );
+
+  // Map Unlock:  Power Reservoir
+  vars.gameFlags.Add("4adb7585036fd48a0a2868ea719fb329GameLevelMapData", Tuple.Create("map_unlock_reservoir", "Central Transport Hub", "GameLevelMapData") );
+  vars.gameFlags.Add("74a699f7b6c6e44b5bd90db491c2e625GameLevelMapData", Tuple.Create("map_unlock_reservoir", "Power Reservoir (East)", "GameLevelMapData") );
+  vars.gameFlags.Add("e587381daf2bd4b7fa349239ef68a3fbGameLevelMapData", Tuple.Create("map_unlock_reservoir", "Power Reservoir (Central)", "GameLevelMapData") );
+  vars.gameFlags.Add("421b37992e6364d9fa83de4d85cc037eGameLevelMapData", Tuple.Create("map_unlock_reservoir", "Power Reservoir (West)", "GameLevelMapData") );
+  vars.gameFlags.Add("cdeee1168f485e74887d0fe58c43681eGameLevelMapData", Tuple.Create("map_unlock_reservoir", "Radiant Pagoda", "GameLevelMapData") );
+
+  // Map Unlock: Agricultural Zone
+  vars.gameFlags.Add("9cc919f329be2405dada15762d5332b4GameLevelMapData", Tuple.Create("map_unlock_agricultural", "Lake Yaochi Ruins", "GameLevelMapData") );
+  vars.gameFlags.Add("744ab7b9ed08a405ea3b4cb036ffdcacGameLevelMapData", Tuple.Create("map_unlock_agricultural", "Greenhouse", "GameLevelMapData") );
+  vars.gameFlags.Add("6c2a22089e6da4355992a205f3ecdfe2GameLevelMapData", Tuple.Create("map_unlock_agricultural", "Water & Oxygen Synthesis", "GameLevelMapData") );
+  vars.gameFlags.Add("0de4247fc506d4d8dbd9af186ed54dbeGameLevelMapData", Tuple.Create("map_unlock_agricultural", "Yinglong Canal", "GameLevelMapData") );
+  vars.gameFlags.Add("bc9ddef07c1e646a294e14745f0046f8GameLevelMapData", Tuple.Create("map_unlock_agricultural", "Agrarian Hall", "GameLevelMapData") );
+
+  // Map Unlock: Warehouse Zone
+  vars.gameFlags.Add("56bbbc379774e3f47b1be9aaecae0b2aGameLevelMapData", Tuple.Create("map_unlock_warehouse", "Outer Warehouse", "GameLevelMapData") );
+  vars.gameFlags.Add("0626b4332cff9a04ea51ae1f645a0d3dGameLevelMapData", Tuple.Create("map_unlock_warehouse", "Inner Warehouse", "GameLevelMapData") );
+  vars.gameFlags.Add("7ef7c38a76eabc54384407e924a0b730GameLevelMapData", Tuple.Create("map_unlock_warehouse", "Boundless Repository (Entrance)", "GameLevelMapData") );
+  vars.gameFlags.Add("11ff35b24567fa343b857b647ba2668eGameLevelMapData", Tuple.Create("map_unlock_warehouse", "Boundless Repository (Inside)", "GameLevelMapData") );
+  vars.gameFlags.Add("1284f6d249c6cd44fb48ca86ec8f6977GameLevelMapData", Tuple.Create("map_unlock_warehouse", "Yangu Hall", "GameLevelMapData") );
+
+  // Map Unlock: Abandoned Mines (Zone)
+  vars.gameFlags.Add("23257e47847f7484e823915fe7386576GameLevelMapData", Tuple.Create("map_unlock_mines", "Factory (Underground)", "GameLevelMapData") );
+  vars.gameFlags.Add("a69792854844a0d4da78200efd6c3975GameLevelMapData", Tuple.Create("map_unlock_mines", "Abandoned Mines (Location)", "GameLevelMapData") );
+
+  // Map Unlock: Livestock Area
+  vars.gameFlags.Add("61d15845d3cb94b548b08824a799151fGameLevelMapData", Tuple.Create("map_unlock_livestock", "Underground Cave", "GameLevelMapData") );
+  vars.gameFlags.Add("faf89d9b9b6b1496bba3a6e7c5ab9b87GameLevelMapData", Tuple.Create("map_unlock_livestock", "95th Livestock Pen", "GameLevelMapData") );
+  vars.gameFlags.Add("f15bfb246c722428fb4eee0c3b7f82c8GameLevelMapData", Tuple.Create("map_unlock_livestock", "Livestock Harvesting Platform", "GameLevelMapData") );
+  vars.gameFlags.Add("26eb02f24e33f4bbb8d6796b4536b7eeGameLevelMapData", Tuple.Create("map_unlock_livestock", "Galactic Dock", "GameLevelMapData") );
+
+  // Map Unlock: Transmutation Zone
+  vars.gameFlags.Add("c666721e0b9424246aa81fd37c5fbd2dGameLevelMapData", Tuple.Create("map_unlock_transmutation", "Factory (Great Hall)", "GameLevelMapData") );
+  vars.gameFlags.Add("51114c048273a42ce8d8fc76edba10aaGameLevelMapData", Tuple.Create("map_unlock_transmutation", "Prison", "GameLevelMapData") );
+  vars.gameFlags.Add("c74093ff6ef0c984d98d82ecabdf6badGameLevelMapData", Tuple.Create("map_unlock_transmutation", "Factory (Machine Room)", "GameLevelMapData") );
+  vars.gameFlags.Add("b9bf8897ef19a4daf8803979a9e59cf7GameLevelMapData", Tuple.Create("map_unlock_transmutation", "Factory (Production Area)", "GameLevelMapData") );
+  vars.gameFlags.Add("ac5fbcf2517b94389b3f4a41fa1cce06GameLevelMapData", Tuple.Create("map_unlock_transmutation", "Shengwu Hall", "GameLevelMapData") );
+
+  // Map Unlock: Central Core
+  vars.gameFlags.Add("592b140bacb5a4079a77c071ac2df07eGameLevelMapData", Tuple.Create("map_unlock_centralcore", "Cortex Center", "GameLevelMapData") );
+  vars.gameFlags.Add("4727637957ed4d74ebc6d4697a9df90cGameLevelMapData", Tuple.Create("map_unlock_centralcore", "Lady Ethereal's Soulscape", "GameLevelMapData") );
+  vars.gameFlags.Add("f1c9ab9f-0e22-4105-8267-54e4b2a68572_93653f615d5940a409fffdcecb72ec43ScriptableDataBool", Tuple.Create("map_unlock_centralcore", "Lady Ethereal Butterfly Segment", "ScriptableDataBool") );
+
+  // Map Unlock: Empyrean District
+  vars.gameFlags.Add("5a29d1bfe51aa470ea7021414fa4e21bGameLevelMapData", Tuple.Create("map_unlock_empyrean", "Sky Tower", "GameLevelMapData") );
+  vars.gameFlags.Add("e8a25a5db46b8420ba9d35eb15ae52dfGameLevelMapData", Tuple.Create("map_unlock_empyrean", "Empyrean District (Passages)", "GameLevelMapData") );
+  vars.gameFlags.Add("0fe1c121c3ffe40d48ec7a1b3549b764GameLevelMapData", Tuple.Create("map_unlock_empyrean", "Empyrean District (Living Area)", "GameLevelMapData") );
+  vars.gameFlags.Add("135eb5244f8364f5d9d2730cdcf1baf6GameLevelMapData", Tuple.Create("map_unlock_empyrean", "Empyrean Dist. (Sanctum)", "GameLevelMapData") );
+  vars.gameFlags.Add("e0383e548585949dfb08a78da77da3baGameLevelMapData", Tuple.Create("map_unlock_empyrean", "Nobility Hall", "GameLevelMapData") );
+
+  // Map Unlock: Grotto of Scriptures
+  vars.gameFlags.Add("870830f0908bd4a43a4d28423da262e4GameLevelMapData", Tuple.Create("map_unlock_grotto", "Grotto of Scriptures (Entry)", "GameLevelMapData") );
+  vars.gameFlags.Add("dd671cd697ba07241ad0b84940dbe3f2GameLevelMapData", Tuple.Create("map_unlock_grotto", "Grotto of Scriptures (East)", "GameLevelMapData") );
+  vars.gameFlags.Add("b0927634d15cba840badaaf7e98bd899GameLevelMapData", Tuple.Create("map_unlock_grotto", "Grotto of Scriptures (West)", "GameLevelMapData") );
+  vars.gameFlags.Add("18a1f7553ca544723af90380184b3cafGameLevelMapData", Tuple.Create("map_unlock_grotto", "Ancient Stone Pillar", "GameLevelMapData") );
+
+  // Map Unlock: Research Institute
+  vars.gameFlags.Add("4b88e20fbe4db4e018bc7c51cfd06317GameLevelMapData", Tuple.Create("map_unlock_institute", "Tiandao Research Center", "GameLevelMapData") );
+  vars.gameFlags.Add("004d9523761fd5b47935512baf84bbc3GameLevelMapData", Tuple.Create("map_unlock_institute", "Tianhuo Research Institute", "GameLevelMapData") );
+
   
   // settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
@@ -187,6 +251,20 @@ startup
   settings.Add("poison_obtain", false, "Split on obtaining a poison");
   settings.Add("rootnode_unlock", false, "Split on unlocking a root node");
   settings.Add("map_unlock", false, "Split on entering a new area");
+  
+  // Groupings for map unlock sub-areas
+  settings.Add("map_unlock_apeman", false, "Apeman Facility", "map_unlock");
+  settings.Add("map_unlock_hub", false, "New Kunlun Hub", "map_unlock");
+  settings.Add("map_unlock_reservoir", false, "Power Reservoir", "map_unlock");
+  settings.Add("map_unlock_agricultural", false, "Agricultural Zone", "map_unlock");
+  settings.Add("map_unlock_warehouse", false, "Warehouse Zone", "map_unlock");
+  settings.Add("map_unlock_mines", false, "Abandoned Mines", "map_unlock");
+  settings.Add("map_unlock_livestock", false, "Livestock Area", "map_unlock");
+  settings.Add("map_unlock_transmutation", false, "Transmutation Zone", "map_unlock");
+  settings.Add("map_unlock_centralcore", false, "Central Core", "map_unlock");
+  settings.Add("map_unlock_empyrean", false, "Empyrean District", "map_unlock");
+  settings.Add("map_unlock_grotto", false, "Grotto of Scriptures", "map_unlock");
+  settings.Add("map_unlock_institute", false, "Research Institute", "map_unlock");
   
   // Add individual flag settings
   foreach (var flagEntry in vars.gameFlags) {
