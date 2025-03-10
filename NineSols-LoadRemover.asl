@@ -234,8 +234,8 @@ startup
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
   settings.Add("memories_start", false, "Start on Memories of Battle boss");
   settings.SetToolTip("memories_start", "For starting timer when starting a boss fight in Memories of Battle mode");
-  // settings.Add("memories_reset", false, "Reset on Memories of Battle hub");
-  // settings.SetToolTip("memories_reset", "For resetting timer when going back to Memories of Battle hub");
+  settings.Add("memories_reset", false, "Reset on Memories of Battle retry");
+  settings.SetToolTip("memories_reset", "For resetting timer when dying or pressing Retry in Memories of Battle (ILs)");
 
   settings.Add("ability_obtain", false, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
@@ -281,20 +281,26 @@ init
 {
   current.SceneIndex = 0;
   current.Scene = "";
-   vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
+  current.bossPostureSystem = 0;
+  current.bossHPBar = 0;
+  current.bossPhase = 0;
+
+  current.JiFix = false;
+
+  vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
    {
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
       var ApplicationUIGroupManager = mono["ApplicationUIGroupManager", 1];
       var SaveManager = mono["SaveManager",1];
-      // var MonsterManager = mono["MonsterManager",1];
+      var CameraManager = mono["CameraManager",1];
+      var MonsterManager = mono["MonsterManager",1];
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
       // vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load, currently not in use
       vars.Helper["gamestate"] = GameCore.Make<int>("_instance","_currentCoreState"); //wow there was an actual loading state
-      // vars.Helper["seamlessload"] = GameCore.Make<bool>("_instance","_currentSeamlessConnectionPoint",0x48); 
+      vars.Helper["YiHP"] = GameCore.Make<float>("_instance","player",0x470,0x94); 
 
-      // vars.Helper["memories_start"] = SaveManager.Make<bool>("_instance","savingIcon",0x28); 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
       vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
@@ -313,8 +319,20 @@ init
              
       /* Boss States */ 
       vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
-      vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
+      // vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
 
+      // Closest monster check for Jiequan
+      // vars.Helper["currentEnemyID"] = MonsterManager.Make<int>("_instance","_closetMonster",0x298); 
+      vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster"); 
+      vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
+      // vars.Helper["currentEnemyCore"] = MonsterManager.MakeString("_instance","_closetMonster",0x280); 
+      // vars.Helper["currentEnemyHP"] = MonsterManager.Make<int>("_instance","_closetMonster",0x280,0x60,0x94); 
+      // vars.Helper["preAttackList"] = MonsterManager.MakeList<IntPtr>("_instance", 0x48); 
+
+      vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
+      
+      vars.Helper["cameraHighlightTime"] = CameraManager.Make<float>("_instance", "currentCameraCore", 0xcc); 
+      vars.Helper["cameraHighlight"] = CameraManager.Make<bool>("_instance", "currentCameraCore", 0xb0, 0x20); 
        
        /* Flags */
       var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
@@ -378,18 +396,25 @@ init
 
 start {
   if(settings["memories_start"] && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
-    // Only trigger start when the scene has changed
-    // Don't trigger the start if the last scene index is set to -1, this means we just entered the game or reset the timer.
-    if(vars.lastCheckedSceneIndexForMOBStart != -1 && vars.lastCheckedSceneIndexForMOBStart != current.SceneIndex) {
-      foreach (var boss in vars.memoriesOfBattleBosses) {
-        if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
-          vars.lastCheckedSceneIndexForMOBStart = -1; //Reset this now so that it's set to 0 when we next reset the timer
-          return true;
-        }
-      }
-    }
+    // If the BossHPList is not empty, get the current boss HP on fight start to trigger auto-start for ILs
+    if (vars.Helper["bossHPUIList"].Current.Count != vars.Helper["bossHPUIList"].Old.Count 
+        && vars.Helper["bossHPUIList"].Current.Count >= vars.Helper["bossHPUIList"].Old.Count) { 
 
-    vars.lastCheckedSceneIndexForMOBStart = current.SceneIndex;
+      // Cheap fix for Ji fight auto-start
+      if (current.SceneIndex == 0 && current.JiFix == false) {
+        current.JiFix = true;
+        return false;
+      }
+
+      // print("START MOB: " +  vars.Helper["bossHPUIList"].Current.Count + " - " + vars.Helper["bossHPUIList"].Old.Count);
+      return true;
+    }
+    // Jiequan detection fix, start on detecting a change in the closetMonster pointer and if the HP is jiequan's max MoB HP
+    if (current.SceneIndex == 41 && vars.Helper["closetMonster"].Current != vars.Helper["closetMonster"].Old && vars.Helper["currentEnemyPosture"].Current == 5400) 
+    { 
+      return true;
+      // print("Start Jiequan: " + vars.Helper["currentEnemyPosture"].Current + " " + current.bossPostureSystem);
+    }
   }
 
   if (settings["fileselect_start"] 
@@ -409,6 +434,7 @@ start {
 
 onStart {
   vars.CompletedSplits.Clear();
+  current.JiFix = false;
 }
 
 isLoading
@@ -426,17 +452,47 @@ isLoading
 update
 {
   current.SceneIndex = vars.Helper.Scenes.Active.Index;
-  current.Scene = vars.Helper.Scenes.Active.Name;
 
-  //  if (old.Scene != current.Scene) { vars.Log("Scene changed: " + old.Scene + ": " +  old.SceneIndex + "-> " + current.Scene + ": " + current.SceneIndex); }
+  if(old.SceneIndex != current.SceneIndex) { 
+    // dirty fix for Ji autostart
+    if (current.SceneIndex == 88) { current.JiFix = false;  }
+    
+    // jiequan HP detection fix reset on scene change
+    if (current.SceneIndex == 41) { current.bossPostureSystem = 0; }
+  }  
+
+  // MoB HP detection updates
+  if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
+    if (current.SceneIndex == 41) {  
+      // jiequan HP detection
+      current.bossPostureSystem = vars.Helper["currentEnemyPosture"].Current; 
+    } 
+    else { 
+      // Go through the boss HP list and store the current posture system HP value
+      // GameCore -> UIMonsterHPManager -> bossHPList<UIBossHP> (destruct)
+      foreach(IntPtr BossHPUI in vars.Helper["bossHPUIList"].Current) {
+        IntPtr BossPosture = vars.Helper.Read<IntPtr>(BossHPUI + 0x70);
+        current.bossHPBar = vars.Helper.Read<float>(BossHPUI + 0xa4);
+
+        // UIBossHP -> PostureSystem -> _value
+        current.bossPostureSystem = vars.Helper.Read<float>(BossPosture + 0x94); 
+
+        // UIBossHP -> PostureSystem -> bindMonster (MonsterBase) -> phaseIndex
+        current.bossPhase = vars.Helper.Read<int>(BossPosture + 0x30 + 0x448);
+      }
+    }
+  }
 }
 
-// reset 
-// {
+reset 
+{
 //   if (settings["mainmenu_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 1) { return true; }
-//   if (settings["memories_reset"] && (old.SceneIndex != current.SceneIndex) && current.SceneIndex == 116) { return true; }
-// }
 
+  // Reset on retry for ILs
+  if (settings["memories_reset"] && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current && vars.Helper["YiHP"].Current <= 0) { 
+    return true; 
+  }
+}
 
 split {
     // Don't trigger any splits that check game flags when we're on the main menu
@@ -468,9 +524,10 @@ split {
 
     
     /* Split on Memories of Battle Boss Kill (experimental)
-      This splits whenever the slowdown goes under the 5% speed threshold, which only happens (presumably) on boss kill  */
+      Camera LastHitHighlight is the black and white effect on kill, and its time is set to 2f when the effect goes on screen. It has a HighlightCamera.enabled property i havent seen how to obtain yet.
+      This would grab that duration as the trigger and also check if the boss has less than 1 HP for certain cases where it ends at less than 0.5 HP and fully dies after the black and white */
     if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
-      if (vars.Helper["SlowMotion"].Current != vars.Helper["SlowMotion"].Old && vars.Helper["SlowMotion"].Current < 0.05) {
+      if (vars.Helper["cameraHighlightTime"].Current != vars.Helper["cameraHighlightTime"].Old && vars.Helper["cameraHighlightTime"].Current > 1.95 && current.bossPostureSystem <= 1)  {
         foreach (var boss in vars.memoriesOfBattleBosses) {
           if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
             if (settings[boss.Value] && !vars.CompletedSplits.Contains(boss.Value)) {
