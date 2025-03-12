@@ -293,6 +293,8 @@ init
       var GameCore = mono["GameCore",1];
       var ApplicationUIGroupManager = mono["ApplicationUIGroupManager", 1];
       var SaveManager = mono["SaveManager",1];
+      var ConfigManager = mono["ConfigManager", 1];
+      var CheatManager = mono["CheatManager", 1];
       var CameraManager = mono["CameraManager",1];
       var MonsterManager = mono["MonsterManager",1];
 
@@ -320,14 +322,6 @@ init
       /* Boss States */ 
       vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
       // vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
-
-      // Closest monster check for Jiequan
-      // vars.Helper["currentEnemyID"] = MonsterManager.Make<int>("_instance","_closetMonster",0x298); 
-      vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster"); 
-      vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
-      // vars.Helper["currentEnemyCore"] = MonsterManager.MakeString("_instance","_closetMonster",0x280); 
-      // vars.Helper["currentEnemyHP"] = MonsterManager.Make<int>("_instance","_closetMonster",0x280,0x60,0x94); 
-      // vars.Helper["preAttackList"] = MonsterManager.MakeList<IntPtr>("_instance", 0x48); 
 
       vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
       
@@ -389,6 +383,12 @@ init
                vars.mobFlagExists = true;
          }
       }
+
+      // Closest monster check for Jiequan
+      if (vars.mobFlagExists) {
+        vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster"); 
+        vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
+      }
       
       return true;
    });
@@ -410,7 +410,7 @@ start {
       return true;
     }
     // Jiequan detection fix, start on detecting a change in the closetMonster pointer and if the HP is jiequan's max MoB HP
-    if (current.SceneIndex == 41 && vars.Helper["closetMonster"].Current != vars.Helper["closetMonster"].Old && vars.Helper["currentEnemyPosture"].Current == 5400) 
+    if (current.SceneIndex == 41 && vars.Helper["closetMonster"] != null && vars.Helper["closetMonster"].Current != vars.Helper["closetMonster"].Old && vars.Helper["currentEnemyPosture"].Current == 5400) 
     { 
       return true;
       // print("Start Jiequan: " + vars.Helper["currentEnemyPosture"].Current + " " + current.bossPostureSystem);
