@@ -21,6 +21,15 @@ startup
   // Dictionary where we'll insert all game flags we want to track. 
   vars.gameFlags = new Dictionary<string, Tuple<string, string, string>>();
 
+  // Abilities
+  vars.gameFlags.Add("f6ddb914baaea4c11a4b995145dbbaadItemData", Tuple.Create("ability_obtain", "Fusang Horn", "GameFlagDescriptable") );
+  vars.gameFlags.Add("950f8f3273611424d9b42ab209e8cac8PlayerAbilityData", Tuple.Create("ability_obtain", "Fusang Horn: Teleport", "GameFlagDescriptable") );
+  vars.gameFlags.Add("ef8f7eb3bcd7b444f80d5da539f3b133PlayerWeaponData", Tuple.Create("ability_obtain", "Arrow: Thunder Buster", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3949bc0edba197d459f5d2d7f15c72e0PlayerWeaponData", Tuple.Create("ability_obtain", "Arrow: Shadow Hunter", "GameFlagDescriptable") );
+  vars.gameFlags.Add("5036f58e39fd647a19adba5bf37069a4SkillNodeData", Tuple.Create("ability_obtain", "Transmute Unto Wealth", "GameFlagDescriptable") );
+  vars.gameFlags.Add("d311393b203f34bf19e020312946d376SkillNodeData", Tuple.Create("ability_obtain", "Transmute Unto Life", "GameFlagDescriptable") );
+  vars.gameFlags.Add("6c03c15409a6244ec92b22d1ed1830c7SkillNodeData", Tuple.Create("ability_obtain", "Transmute Unto Qi", "GameFlagDescriptable") );
+
   // Ability Rooms 
   vars.gameFlags.Add("d7a7775c-dd94-40af-9a65-bcbc73bcef43_9e73acaa5eb0f4a65bd599ed193c852cScriptableDataBool", Tuple.Create("ability_exit", "Tai Chi Kick Room", "ScriptableDataBool") );
   vars.gameFlags.Add("a791e2f5-4cfb-4be0-a8aa-cb4344ce5784_ee992f5c8f50b4b0caa5ef6c27d19d4dScriptableDataBool", Tuple.Create("ability_exit", "Charged Strike Room", "ScriptableDataBool") );
@@ -40,18 +49,51 @@ startup
   vars.gameFlags.Add("cea7218ddb8b449008101c3ccdc8b50bItemData", Tuple.Create("seal_obtain", "Nuwa Seal", "GameFlagDescriptable") );
   vars.gameFlags.Add("6146c740-3940-4975-8061-a93726013e17_ab6a52c60b84a4d6fb5a32242f77bad1ScriptableDataBool", Tuple.Create("seal_obtain", "Eigong Soulscape", "ScriptableDataBool") );
 
+  // Key Items
+  vars.gameFlags.Add("739f82b064f1d40ff953c4bdf845c5d1ItemData", Tuple.Create("keyitem_obtain", "Crimson Hibiscus", "GameFlagDescriptable") );
+  vars.gameFlags.Add("ebc522544cda748f4b2e121041f34752ItemData", Tuple.Create("keyitem_obtain", "Bloody Crimson Hibiscus", "GameFlagDescriptable") );
+  vars.gameFlags.Add("012ed640ec72c5e409d85c7e8a6b4436ItemData", Tuple.Create("keyitem_obtain", "Ancient Penglai Ballad", "GameFlagDescriptable") );
+  vars.gameFlags.Add("baaef97de0f4c294080224ebb9b1108eItemData", Tuple.Create("keyitem_obtain", "Poem Hidden in the Immortal’s Portrait", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8722c67effb3dc844b48c5082ef55b70ItemData", Tuple.Create("keyitem_obtain", "Thunderburst Bomb", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3f24b97a10eaa914fbca5cf866b6dcb8ItemData", Tuple.Create("keyitem_obtain", "Homing Darts", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b6b928329a5ae114ca7ab0935bb6427cItemData", Tuple.Create("keyitem_obtain", "Soul-Severing Blade", "GameFlagDescriptable") );
+  vars.gameFlags.Add("a3dd1abd74d68304687da6ad5ff3fe56ItemData", Tuple.Create("keyitem_obtain", "Firestorm Ring", "GameFlagDescriptable") );
+  vars.gameFlags.Add("54fa2de19e7780448b773554d0229750ItemData", Tuple.Create("keyitem_obtain", "Yellow Dragonsnake Venom Sac", "GameFlagDescriptable") );
+  vars.gameFlags.Add("80dca009f7f94024b9567c9acc857fd6ItemData", Tuple.Create("keyitem_obtain", "Yellow Dragonsnake Medicinal Brew", "GameFlagDescriptable") );
+  vars.gameFlags.Add("ac3f2ead21bde4ef886068840a25a9e6ItemData", Tuple.Create("keyitem_obtain", "Ji’s Hair", "GameFlagDescriptable") );
+  vars.gameFlags.Add("16d0ec9928dc24b4cac4830f25e986dcItemData", Tuple.Create("keyitem_obtain", "Tianhuo Serum", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4930f5079e3fe4571aeeb640c3563c78ItemData", Tuple.Create("keyitem_obtain", "Elevator Access Token", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8b04356645160f24ab172496244c34c2ItemData", Tuple.Create("keyitem_obtain", "Rhizomatic Bomb", "GameFlagDescriptable") );
+  vars.gameFlags.Add("40c579b4aaf773b4a9a9078633b1d7fbItemData", Tuple.Create("keyitem_obtain", "Rhizomatic Arrow", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e50d7e80053813c4cae82eae265b9326ItemData", Tuple.Create("keyitem_obtain", "Abandoned Mines Access Token", "GameFlagDescriptable") );
+  vars.gameFlags.Add("a3960b34a56b2ad4998b5538bef3ce0bItemData", Tuple.Create("keyitem_obtain", "Friend Photo", "GameFlagDescriptable") );
+
   // Boss Kills
-  vars.gameFlags.Add("740a8b30-e3cc-4acc-9f5f-da3aaae1df5e_51c211e21fecd9e4c92f41d8d72aa395ScriptableDataBool", Tuple.Create("boss_kill", "Red Tiger Elite: Baichang", "ScriptableDataBool") );
-  vars.gameFlags.Add("2798b3a9-1026-4d53-b41c-5489699a19de_c3c3f30fb046d9743aea48eb8f4833bcScriptableDataBool", Tuple.Create("boss_kill", "Celestial Sentinel: Jiaoduan", "ScriptableDataBool") );
-  vars.gameFlags.Add("593da1d0fcfe85e45b43c39ccb2c6d19ScriptableDataBool", Tuple.Create("boss_kill", "General: Yingzhao", "ScriptableDataBool") );
-  vars.gameFlags.Add("f5b26e3311ce4e84a961dc36a05e19b7ScriptableDataBool", Tuple.Create("boss_kill", "Goumang", "ScriptableDataBool") );
-  vars.gameFlags.Add("098316c3b4ddf514fbc2dc2806475da2ScriptableDataBool", Tuple.Create("boss_kill", "Xingtian", "ScriptableDataBool") );
-  vars.gameFlags.Add("b500f8ebeb10f46a085b9720f5a78affScriptableDataBool", Tuple.Create("boss_kill", "Kanghui", "ScriptableDataBool") );
-  vars.gameFlags.Add("bc5ca55c-065c-4ad8-9f18-bbc7ab2e468a_11c84f9bfd4e1445395ec443308d3965ScriptableDataBool", Tuple.Create("boss_kill", "Celestial Enforcer: Huanxian", "ScriptableDataBool") );
-  vars.gameFlags.Add("50926aad-0750-4f3b-9318-dc5da45e75f1_4256ef2ec22f942dc9f70607bb00391fScriptableDataBool", Tuple.Create("boss_kill", "The Great Miner: Tianshou", "ScriptableDataBool") );
-  vars.gameFlags.Add("b02ac84c63b804448b50c45c7f19ebb8ScriptableDataBool", Tuple.Create("boss_kill", "Red Tiger Elite: Lieguan", "ScriptableDataBool") );
-  vars.gameFlags.Add("eb5c407de5f18ae478f86b4287bcd600ScriptableDataBool", Tuple.Create("boss_kill", "Spirit Keeper: Cixing", "ScriptableDataBool") );
-  vars.gameFlags.Add("e965aab1c014b4273b928b17fbcff379ScriptableDataBool", Tuple.Create("boss_kill", "Eigong", "ScriptableDataBool") );
+  vars.gameFlags.Add("593da1d0fcfe85e45b43c39ccb2c6d19ScriptableDataBool", Tuple.Create("mainboss_kill", "General: Yingzhao", "ScriptableDataBool") );
+  vars.gameFlags.Add("f5b26e3311ce4e84a961dc36a05e19b7ScriptableDataBool", Tuple.Create("mainboss_kill", "Goumang", "ScriptableDataBool") );
+  vars.gameFlags.Add("098316c3b4ddf514fbc2dc2806475da2ScriptableDataBool", Tuple.Create("mainboss_kill", "Xingtian", "ScriptableDataBool") );
+  vars.gameFlags.Add("fac7bf4a1b1f89d47873e1ec23d1c3c8ScriptableDataBool", Tuple.Create("mainboss_kill", "Yanlao", "ScriptableDataBool") );
+  vars.gameFlags.Add("b500f8ebeb10f46a085b9720f5a78affScriptableDataBool", Tuple.Create("mainboss_kill", "Kanghui", "ScriptableDataBool") );
+  vars.gameFlags.Add("9758240a82bf8472a884fe3123cd6a2cScriptableDataBool", Tuple.Create("mainboss_kill", "Jiequan", "ScriptableDataBool") );
+  vars.gameFlags.Add("6944565dad46a40c2abc1e23f2a43b9eScriptableDataBool", Tuple.Create("mainboss_kill", "Lady Ethereal", "ScriptableDataBool") );
+  vars.gameFlags.Add("5f5f478635ac043de8548c4bd01f96d8ScriptableDataBool", Tuple.Create("mainboss_kill", "Ji", "ScriptableDataBool") );
+  vars.gameFlags.Add("515275bbda5bb4e22ba6734765b9d5f0ScriptableDataBool", Tuple.Create("mainboss_kill", "The Fengs", "ScriptableDataBool") );
+  vars.gameFlags.Add("b3697303-e24c-4b74-bd77-878405db5956_096fc6e6545b944499588940b495a7c9ScriptableDataBool", Tuple.Create("mainboss_kill", "Xingtian 2", "ScriptableDataBool") );
+  vars.gameFlags.Add("e965aab1c014b4273b928b17fbcff379ScriptableDataBool", Tuple.Create("mainboss_kill", "Eigong", "ScriptableDataBool") );
+
+  vars.gameFlags.Add("740a8b30-e3cc-4acc-9f5f-da3aaae1df5e_51c211e21fecd9e4c92f41d8d72aa395ScriptableDataBool", Tuple.Create("miniboss_kill", "Red Tiger Elite: Baichang", "ScriptableDataBool") );
+  vars.gameFlags.Add("f02edcb5-d9e9-4d82-8720-f1edc3ad2584_bdb107bda9026404c998ac905b5c7c4cScriptableDataBool", Tuple.Create("miniboss_kill", "Red Tiger Elite: Kuiyan", "ScriptableDataBool") );
+  vars.gameFlags.Add("9fe14cb5-dbbe-4475-815e-6d10a3154d71_cb3bbfb9ba35a544984803710f5abefaScriptableDataBool", Tuple.Create("miniboss_kill", "Red Tiger Elite: Yanren", "ScriptableDataBool") );
+  vars.gameFlags.Add("b02ac84c63b804448b50c45c7f19ebb8ScriptableDataBool", Tuple.Create("miniboss_kill", "Red Tiger Elite: Lieguan", "ScriptableDataBool") );
+  vars.gameFlags.Add("2798b3a9-1026-4d53-b41c-5489699a19de_c3c3f30fb046d9743aea48eb8f4833bcScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Sentinel: Jiaoduan", "ScriptableDataBool") );
+  vars.gameFlags.Add("d439daf8-aaa0-4427-b5fe-5b55059ec748_c83c9231040ca21409a717047a99f127ScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Sentinel: Wuqiang", "ScriptableDataBool") );
+  vars.gameFlags.Add("79982da1-b0c0-4a3e-b53f-cea5ebdb2afa_efdc8e91e5eb76347b87b832ac07330cScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Spectre: Shuigui", "ScriptableDataBool") );
+  vars.gameFlags.Add("558ba1a9-0f3c-47cb-835c-e1a969ba0ec2_19ef97be8cb7b4fca9d79b754bb6c81cScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Spectre: Shangui", "ScriptableDataBool") );
+  vars.gameFlags.Add("27a85ba1-abe8-4a23-b07b-4eb558b6dd35_286e6acc5d4484caa93380d46d08e162ScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Enforcer: Tieyan", "ScriptableDataBool") );
+  vars.gameFlags.Add("bc5ca55c-065c-4ad8-9f18-bbc7ab2e468a_11c84f9bfd4e1445395ec443308d3965ScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Enforcer: Huanxian", "ScriptableDataBool") );
+  vars.gameFlags.Add("b3c981ef-5094-4bc7-804c-60b9f3d75f56_104b8d0cf618434478e9e75ae3ee9d88ScriptableDataBool", Tuple.Create("miniboss_kill", "Celestial Warden: Yinyue", "ScriptableDataBool") );
+  vars.gameFlags.Add("50926aad-0750-4f3b-9318-dc5da45e75f1_4256ef2ec22f942dc9f70607bb00391fScriptableDataBool", Tuple.Create("miniboss_kill", "The Great Miner: Tianshou", "ScriptableDataBool") );
+  vars.gameFlags.Add("eb5c407de5f18ae478f86b4287bcd600ScriptableDataBool", Tuple.Create("miniboss_kill", "Spirit Keeper: Cixing", "ScriptableDataBool") );
   
   // Jades
   vars.gameFlags.Add("7e33977082bec4db5ab349143f89c24fJadeData", Tuple.Create("jade_obtain", "Qi Thief Jade", "GameFlagDescriptable") );
@@ -119,6 +161,48 @@ startup
   vars.gameFlags.Add("4bb79b0a891845542848960ddfd0a03cItemData", Tuple.Create("poison_obtain", "Thunder Centipede", "GameFlagDescriptable") );
   vars.gameFlags.Add("00b0232c825990a45a3aad8212dff74eItemData", Tuple.Create("poison_obtain", "Wall-climbing Gecko", "GameFlagDescriptable") );
   vars.gameFlags.Add("2203778119e9b0540a493e3d4981d5e2ItemData", Tuple.Create("poison_obtain", "Gutwrench Fruit", "GameFlagDescriptable") );
+
+  // Map Chips
+  vars.gameFlags.Add("ea9a496b025d3495c9dc2ef974fdc092ItemData", Tuple.Create("mapchip_obtain", "Power Reservoir Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("dbde23882967941729f72898668d888eItemData", Tuple.Create("mapchip_obtain", "Agricultural Zone Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1f04b20cba6dd44edb862ed7cac7c8c3ItemData", Tuple.Create("mapchip_obtain", "Warehouse Zone Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("62c8e43f21bdb4629816759f012f2dc4ItemData", Tuple.Create("mapchip_obtain", "Transmutation Zone Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("44eb40430cc294dcba56f740fc539336ItemData", Tuple.Create("mapchip_obtain", "Abandoned Mines Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cc2161127ffac40f3900b2338732539cItemData", Tuple.Create("mapchip_obtain", "Central Core Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("81fd8581688cd4b16947568280181a3eItemData", Tuple.Create("mapchip_obtain", "Empyrean District Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("15afe59971f8d4ba2ba254aa63fbcccdItemData", Tuple.Create("mapchip_obtain", "Grotto of Scriptures Chip", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8cadca0dd118b433996ceff3b40c65f1ItemData", Tuple.Create("mapchip_obtain", "Research Institute Chip", "GameFlagDescriptable") );
+  
+  // Recyclables
+  vars.gameFlags.Add("6be26d51d342d73418ba832be13bc58eItemData", Tuple.Create("recyclable_obtain", "Noble Ring", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c4a79371b6ba3ce47bbdda684236f7b5ItemData", Tuple.Create("recyclable_obtain", "Gene Eradicator", "GameFlagDescriptable") );
+  vars.gameFlags.Add("26ee16f6dab31d544aa70ab3ccd74c27ItemData", Tuple.Create("recyclable_obtain", "Shuanshuan Coin", "GameFlagDescriptable") );
+  vars.gameFlags.Add("984057d55ad9a114b8f70d789f51a94aItemData", Tuple.Create("recyclable_obtain", "Jin Medallion", "GameFlagDescriptable") );
+  vars.gameFlags.Add("7f39eb3683ab07642b07a29c92f2b2eeItemData", Tuple.Create("recyclable_obtain", "Passenger Token: A-Shou", "GameFlagDescriptable") );
+  vars.gameFlags.Add("795a70bd2b1f7314ab17f5a5cf5266acItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Zouyan", "GameFlagDescriptable") );
+  vars.gameFlags.Add("9e4262f433d0f71488554605fd049696ItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Xipu", "GameFlagDescriptable") );
+  vars.gameFlags.Add("fe61f446873eb224bbf1f579e422bd7aItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Jihai", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8f37452c73abd62439d7b19bb04704ceItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Yangfan", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1b325062bb8a12f4d9f011b2ae560718ItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Aimu", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e235b00504a9145ed81edf6c2a2e0091ItemData", Tuple.Create("recyclable_obtain", "Passenger Token: Shiyangyue", "GameFlagDescriptable") );
+
+  // Tao Fruits
+  vars.gameFlags.Add("5dca2439-7a4c-4e9e-9e66-a0282319627b_a1bc70e2b281c4edba29a867c61f2fb1ScriptableDataBool", Tuple.Create("taofruit_obtain", "Galactic Dock Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("1d9a273a-d817-4734-b0ae-8effef275a71_19ef97be8cb7b4fca9d79b754bb6c81cScriptableDataBool", Tuple.Create("taofruit_obtain", "Apeman Facility (Depths) Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("37adc43b-6e63-4f05-8641-7fa1e034a9ac_7592523794a14b241bbd479bdd35d2f3ScriptableDataBool", Tuple.Create("taofruit_obtain", "Power Reservoir (West) Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("994df5a4-716f-4a08-9730-161c9162fce2_3f513b824c96d4571937497e4cbbe5acScriptableDataBool", Tuple.Create("taofruit_obtain", "Water & Oxygen Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("e08b2605-4d1f-4a4e-b864-8a105f7af52b_286e6acc5d4484caa93380d46d08e162ScriptableDataBool", Tuple.Create("taofruit_obtain", "Inner Warehouse Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("6eef7fd0-7feb-493f-80ab-849699cc874b_6a7e9701c4ef0487683e312ec59d4d60ScriptableDataBool", Tuple.Create("taofruit_obtain", "Great Hall Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("37393fc2-f05b-4c94-8bb2-1e3f81e64ff8_3ab980947561e27459c2316b2a59889bScriptableDataBool", Tuple.Create("taofruit_obtain", "Great Hall (Herb Room) Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("b70de28f-4097-406c-8cf8-583870dc4ab5_104b8d0cf618434478e9e75ae3ee9d88ScriptableDataBool", Tuple.Create("taofruit_obtain", "Abandoned Mines Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("97d45562-89e6-463d-8740-4d1e012cfd18_92a5cecaeb73b428fa0e2b6990d4fb1bScriptableDataBool", Tuple.Create("taofruit_obtain", "Sky Tower Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("e08b2605-4d1f-4a4e-b864-8a105f7af52b_348738fb5673845a6aa8b023a95252cfScriptableDataBool", Tuple.Create("taofruit_obtain", "Empyrean (Living Area) Tao Fruit", "ScriptableDataBool") );
+
+  vars.gameFlags.Add("37adc43b-6e63-4f05-8641-7fa1e034a9ac_c6768859162eb40abaffe7d2dfb703f4ScriptableDataBool", Tuple.Create("taofruit_obtain", "Machine Room Greater Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("18a7e188-ce20-495f-8ff9-49b2b0a78515_caffe6beb70444888bda9f21182c38a2ScriptableDataBool", Tuple.Create("taofruit_obtain", "Yanlao Greater Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("42e16c3d-e649-417c-909f-400422f8418b_f35dcb18f667441e18541169edcebb1fScriptableDataBool", Tuple.Create("taofruit_obtain", "Jiequan Greater Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("b70de28f-4097-406c-8cf8-583870dc4ab5_d5d14d9cbe2ff4247b9d7d1b58ae339bScriptableDataBool", Tuple.Create("taofruit_obtain", "Lady Ethereal Greater Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("7212c72d-ce6c-4b5f-a536-4ec7a4e2934e_89b9e9ea7db2e4c118c7e8f1be3e7cf4ScriptableDataBool", Tuple.Create("taofruit_obtain", "Twin Tao Fruit", "ScriptableDataBool") );
 
   // Root Nodes
   vars.gameFlags.Add("3f4604f810c9e9a469f01d352d8035b9TeleportPointData", Tuple.Create("rootnode_unlock", "Galactic Dock", "GameFlagDescriptable") );
@@ -228,7 +312,84 @@ startup
   vars.gameFlags.Add("4b88e20fbe4db4e018bc7c51cfd06317GameLevelMapData", Tuple.Create("map_unlock_institute", "Tiandao Research Center", "GameLevelMapData") );
   vars.gameFlags.Add("004d9523761fd5b47935512baf84bbc3GameLevelMapData", Tuple.Create("map_unlock_institute", "Tianhuo Research Institute", "GameLevelMapData") );
 
-  
+  // Database: Character Entries
+  vars.gameFlags.Add("f5e7051f307dcf448a40d1f36e99a63dEncyclopediaItem", Tuple.Create("characterentry_unlock", "Yi", "GameFlagDescriptable") );
+  vars.gameFlags.Add("fb1b6921c130f7a44b4bde4de9f3698fEncyclopediaItem", Tuple.Create("characterentry_unlock", "Shuanshuan Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("755f00ff0abccd8489ffc74eb9b77116EncyclopediaItem", Tuple.Create("characterentry_unlock", "Shuanshuan Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("00c585e0186d60a4285e01d2e7247f54EncyclopediaItem", Tuple.Create("characterentry_unlock", "Shennong Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c43bc653acf552347acb74d53e36f1f3EncyclopediaItem", Tuple.Create("characterentry_unlock", "Shennong Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4836fa6e9e0c66c4c8238a9c50885468EncyclopediaItem", Tuple.Create("characterentry_unlock", "Abacus - Ruyi Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("3d369fe813678e24a8d91c175a49505eEncyclopediaItem", Tuple.Create("characterentry_unlock", "Abacus - Ruyi Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("04d90cc08ac4b904d8d627052439857cEncyclopediaItem", Tuple.Create("characterentry_unlock", "Shanhai 9000 Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("706f3711dce19e147a0e83f35d9f9024EncyclopediaItem", Tuple.Create("characterentry_unlock", "Shanhai 9000 Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("815214d30d5b64c40b1184883bbddaa7EncyclopediaItem", Tuple.Create("characterentry_unlock", "Chiyou Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c478d9b800c7cfb4dabb584e51a95093EncyclopediaItem", Tuple.Create("characterentry_unlock", "Chiyou Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("478420773cf1ab84dbb99aef2df8653eEncyclopediaItem", Tuple.Create("characterentry_unlock", "Kuafu Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("72e94c0a930bb5a48a3de2e684cf3b81EncyclopediaItem", Tuple.Create("characterentry_unlock", "Kuafu Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("93a029bbcf4fd9b4ea61eb53931fbe3bEncyclopediaItem", Tuple.Create("characterentry_unlock", "Goumang Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("43e2a7c28741eb246adc04e3c2ac2137EncyclopediaItem", Tuple.Create("characterentry_unlock", "Goumang Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e06a0508c554e2c4aa698e66b40c0a18EncyclopediaItem", Tuple.Create("characterentry_unlock", "Yanlao Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("2577d0caf88cf6d4daf729f1bde7e62cEncyclopediaItem", Tuple.Create("characterentry_unlock", "Yanlao Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("76d0ee9d9d884a844aeacf8fe02201c9EncyclopediaItem", Tuple.Create("characterentry_unlock", "Jiequan Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("45775bae9f4689746b9be23a6c8b1348EncyclopediaItem", Tuple.Create("characterentry_unlock", "Jiequan Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4d5149d638b88a647a274d8c8f745884EncyclopediaItem", Tuple.Create("characterentry_unlock", "Lady Ethereal Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e96389eb25422b84b8fd73c354700597EncyclopediaItem", Tuple.Create("characterentry_unlock", "Lady Ethereal Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("f3e032790926ac745ace8376465bf3e7EncyclopediaItem", Tuple.Create("characterentry_unlock", "Ji", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1b9040c1f1b414949a1e2a1d2b8f500cEncyclopediaItem", Tuple.Create("characterentry_unlock", "Fuxi Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("721bfd51913a6f745b8ba7a35fb6a350EncyclopediaItem", Tuple.Create("characterentry_unlock", "Fuxi Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("bcd7ab8fcb04fc14f8f95fe309dc6ffeEncyclopediaItem", Tuple.Create("characterentry_unlock", "Nuwa Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cbaf77d66f16c0543bd57fbca88afcf4EncyclopediaItem", Tuple.Create("characterentry_unlock", "Nuwa Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("bcc8d5ccfad899043b0f7147ebe7a623EncyclopediaItem", Tuple.Create("characterentry_unlock", "Eigong Unlocked", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cfe769d63ebe1a3429f1838e2c401d1cEncyclopediaItem", Tuple.Create("characterentry_unlock", "Eigong Completed", "GameFlagDescriptable") );
+  vars.gameFlags.Add("25ef42e93c6960741bd29655842bd29aEncyclopediaItem", Tuple.Create("characterentry_unlock", "Heng", "GameFlagDescriptable") );
+
+  // Database: Encyclopedia
+  vars.gameFlags.Add("cca1601f63325463ca56b28fba2ac3bbEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "01 - Dead Person's Note", "GameFlagDescriptable") );
+  vars.gameFlags.Add("aef5b069abec5437e92be1d08e63855eEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "02 - Camp Scroll", "GameFlagDescriptable") );
+  vars.gameFlags.Add("6f09dd55228d01f4797a1d3d8a5e0e61EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "03 - Apemen Surveillance Footage", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b5ca02d4c727444f0ab3da1b7fdfe198EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "04 - Council Digital Signage", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e2a7fbf9aeafc48328541c6abc72a464EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "05 - New Kunlun Launch Memorial", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c8087170a9ebe2440b88559f0a676921EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "06 - Anomalous Root Node", "GameFlagDescriptable") );
+  vars.gameFlags.Add("d6a96d9595386364abf56c85bfa2a32eEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "07 - Rhizomatic Energy Meter", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e0c18d6fbe20fde449d1ae43ade87870EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "08 - Dusk Guardian Recording Device 1", "GameFlagDescriptable") );
+  vars.gameFlags.Add("074b013e9264d486da7de635c2d3864dEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "09 - Radiant Pagoda Control Panel", "GameFlagDescriptable") );
+  vars.gameFlags.Add("093afc7ff350d47dba3217da80b09eedEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "10 - Lake Yaochi Stele", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8bd01994a26d46343a21e8a6f7080634EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "11 - Ancient Cave Painting", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1b2ed9110ab548e42931345bfd984fedEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "12 - Coffin Inscription", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e3fd6e22b80be47ee97d69adbebe8baeEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "13 - Yellow Water Report", "GameFlagDescriptable") );
+  vars.gameFlags.Add("88121ba0c1030408a974cf1d99140fd9EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "14 - Mutated Crops", "GameFlagDescriptable") );
+  vars.gameFlags.Add("17858803e17337c4ba1cf7cd1c84836dEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "15 - Water Synthesis Pipeline Panel", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1e6bf4d86baa5f44b8a44a04ec64815aEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "16 - Dusk Guardian Recording Device 2", "GameFlagDescriptable") );
+  vars.gameFlags.Add("196708902c61b4f0abc1e343c650c2e5EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "17 - Farmland Markings", "GameFlagDescriptable") );
+  vars.gameFlags.Add("fe09efd3264ed492d9d97c69bcb68631EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "18 - Council Tenets", "GameFlagDescriptable") );
+  vars.gameFlags.Add("101f4db545b3dc149bd83c575225fbc7EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "19 - Transmutation Furnace Monitor", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1eb714c43cdb548b3b18fab21847f561EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "20 - Evacuation Notice for Miners", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b7df8be887589d844b9e648acadbe1e2EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "21 - Warehouse Database", "GameFlagDescriptable") );
+  vars.gameFlags.Add("409c0d8a55857f84b8d18218559f4869EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "22 - Dusk Guardian Recording Device 3", "GameFlagDescriptable") );
+  vars.gameFlags.Add("fb3c0ab8f201840ef9126e088046f3fdEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "23 - Ancient Weapon Console", "GameFlagDescriptable") );
+  vars.gameFlags.Add("a18f20b13ed394fb7bd7d50f0470a5f6EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "24 - Hexachrem Vault Scroll", "GameFlagDescriptable") );
+  vars.gameFlags.Add("64ae4af6ad3ef8d48b38d38581fbeab5EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "25 - Prisoner's Bamboo Scroll (I)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cff374c3e4499d74483e75665fb87d96EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "26 - Prisoner's Bamboo Scroll (II)", "GameFlagDescriptable") );
+  vars.gameFlags.Add("044cbc32e4bad49bcadec39def818dd5EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "27 - Jie Clan Family Precept", "GameFlagDescriptable") );
+  vars.gameFlags.Add("e12e50bede6add0498844441ca76d3aeEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "28 - Guard Production Station", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cdd0012ad4db39141a0af084460f4e2cEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "29 - Dusk Guardian Recording Device 4", "GameFlagDescriptable") );
+  vars.gameFlags.Add("608c6830970fe4385aeac10ad290428cEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "30 - Pharmacy Panel", "GameFlagDescriptable") );
+  vars.gameFlags.Add("7478f506316dd4eeb9dc2ef7d4dbb122EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "31 - Haotian Sphere Model", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cead86cbe2ec8a744b6c83d8d8e0a5e8EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "32 - Cave Stone Inscription", "GameFlagDescriptable") );
+  vars.gameFlags.Add("80b4d0ed2190ed84da86efd425256c6cEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "33 - Galactic Dock Sign", "GameFlagDescriptable") );
+  vars.gameFlags.Add("ce171afc4c3b69e439444abad643eae4EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "34 - Stone Carvings", "GameFlagDescriptable") );
+  vars.gameFlags.Add("b2d9abd742ccba747846527fb995ecddEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "35 - Secret Mural I", "GameFlagDescriptable") );
+  vars.gameFlags.Add("1a37c30f26f84074b90ec92bdf1197b2EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "36 - Secret Mural II", "GameFlagDescriptable") );
+  vars.gameFlags.Add("cff31b90ae300f549bf00535703ced17EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "37 - Secret Mural III", "GameFlagDescriptable") );
+  vars.gameFlags.Add("aaddc36fd468ac946919ea84f4623d75EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "38 - Stowaway's Corpse", "GameFlagDescriptable") );
+  vars.gameFlags.Add("9f75430aa354b7946a7f65fc849684b4EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "39 - Underground Water Tower", "GameFlagDescriptable") );
+  vars.gameFlags.Add("dd131993d18510b478a6f466ba366ffbEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "40 - Empyrean Bulletin Board", "GameFlagDescriptable") );
+  vars.gameFlags.Add("c28736cb52917b549a11d6f63f6523e0EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "41 - Dusk Guardian Recording Device 5", "GameFlagDescriptable") );
+  vars.gameFlags.Add("9b4658617a3e45a46baa1eb8d25fde8eEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "42 - Vital Sanctum Tower Monitoring Panel", "GameFlagDescriptable") );
+  vars.gameFlags.Add("0a4b2b7fdfba0af4f82355e086d312caEncyclopediaItem", Tuple.Create("encyclopedia_unlock", "43 - Dusk Guardian Recording Device 6", "GameFlagDescriptable") );
+  vars.gameFlags.Add("4e7c90d21f20f814aaacdbfb1d0cc857EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "44 - Dusk Guardian Headquarters Screen", "GameFlagDescriptable") );
+  vars.gameFlags.Add("8acf8ff82f57b414887b68e127c7fee7EncyclopediaItem", Tuple.Create("encyclopedia_unlock", "45 - Root Core Monitoring Device", "GameFlagDescriptable") );
+
   // settings.Add("mainmenu_reset", false, "Reset on Main Menu");
   settings.Add("fileselect_start", false, "Start on existing Save");
   settings.SetToolTip("fileselect_start", "For starting timer when selecting any existing save. Don't use with new save file creation.");
@@ -237,41 +398,57 @@ startup
   settings.Add("memories_reset", false, "Reset on Memories of Battle retry");
   settings.SetToolTip("memories_reset", "For resetting timer when dying or pressing Retry in Memories of Battle (ILs)");
 
-  settings.Add("ability_obtain", false, "Split on obtaining ability");
+  settings.Add("ability_obtain", true, "Split on obtaining ability");
   foreach (var ability in vars.abilities) { 
     settings.Add(ability.Value, false, ability.Key, "ability_obtain"); 
   }
 
-  // Add settings groupings for flags
-  settings.Add("ability_exit", false, "Split on exiting Ability tutorial maps");
-  settings.Add("seal_obtain", false, "Split on exiting a Sol's Soulscape room");
-  settings.Add("boss_kill", false, "Split on Boss Kill");
-  settings.Add("jade_obtain", false, "Split on obtaining a jade");
-  settings.Add("artifact_obtain", false, "Split on obtaining an artifact");
-  settings.Add("poison_obtain", false, "Split on obtaining a poison");
-  settings.Add("rootnode_unlock", false, "Split on unlocking a root node");
-  settings.Add("map_unlock", false, "Split on entering a new area");
+  // Add top level settings groupings for flags
+  settings.Add("ability_exit", true, "Split on exiting Ability tutorial maps");
+  settings.Add("seal_obtain", true, "Split on exiting a Sol's Soulscape room");
+  settings.Add("item_obtain", true, "Split on obtaining an item");
+  settings.Add("boss_kill", true, "Split on Boss Kill");
+  settings.Add("rootnode_unlock", true, "Split on unlocking a root node");
+  settings.Add("map_unlock", true, "Split on entering a new area");
+  settings.Add("database_unlock", true, "Split on unlocking a database entry");
+
+  // Item pickup sub-groupings
+  settings.Add("keyitem_obtain", true, "Key Items", "item_obtain");
+  settings.Add("jade_obtain", true, "Jades", "item_obtain");
+  settings.Add("artifact_obtain", true, "Artifacts", "item_obtain");
+  settings.Add("poison_obtain", true, "Poisons", "item_obtain");
+  settings.Add("recyclable_obtain", true, "Recyclables", "item_obtain");
+  settings.Add("mapchip_obtain", true, "Map Chips", "item_obtain");
+  settings.Add("taofruit_obtain", true, "Tao Fruits", "item_obtain");
+
+  // Boss kill sub-groupings
+  settings.Add("mainboss_kill", true, "Main Bosses", "boss_kill");
+  settings.Add("miniboss_kill", true, "Mini Bosses", "boss_kill");
+
+  // Database sub-groupings
+  settings.Add("characterentry_unlock", true, "Character Entries", "database_unlock");
+  settings.Add("encyclopedia_unlock", true, "Encyclopedia Entries", "database_unlock");
   
   // Groupings for map unlock sub-areas
-  settings.Add("map_unlock_apeman", false, "Apeman Facility", "map_unlock");
-  settings.Add("map_unlock_hub", false, "New Kunlun Hub", "map_unlock");
-  settings.Add("map_unlock_reservoir", false, "Power Reservoir", "map_unlock");
-  settings.Add("map_unlock_agricultural", false, "Agricultural Zone", "map_unlock");
-  settings.Add("map_unlock_warehouse", false, "Warehouse Zone", "map_unlock");
-  settings.Add("map_unlock_mines", false, "Abandoned Mines", "map_unlock");
-  settings.Add("map_unlock_livestock", false, "Livestock Area", "map_unlock");
-  settings.Add("map_unlock_transmutation", false, "Transmutation Zone", "map_unlock");
-  settings.Add("map_unlock_centralcore", false, "Central Core", "map_unlock");
-  settings.Add("map_unlock_empyrean", false, "Empyrean District", "map_unlock");
-  settings.Add("map_unlock_grotto", false, "Grotto of Scriptures", "map_unlock");
-  settings.Add("map_unlock_institute", false, "Research Institute", "map_unlock");
+  settings.Add("map_unlock_apeman", true, "Apeman Facility", "map_unlock");
+  settings.Add("map_unlock_hub", true, "New Kunlun Hub", "map_unlock");
+  settings.Add("map_unlock_reservoir", true, "Power Reservoir", "map_unlock");
+  settings.Add("map_unlock_agricultural", true, "Agricultural Zone", "map_unlock");
+  settings.Add("map_unlock_warehouse", true, "Warehouse Zone", "map_unlock");
+  settings.Add("map_unlock_mines", true, "Abandoned Mines", "map_unlock");
+  settings.Add("map_unlock_livestock", true, "Livestock Area", "map_unlock");
+  settings.Add("map_unlock_transmutation", true, "Transmutation Zone", "map_unlock");
+  settings.Add("map_unlock_centralcore", true, "Central Core", "map_unlock");
+  settings.Add("map_unlock_empyrean", true, "Empyrean District", "map_unlock");
+  settings.Add("map_unlock_grotto", true, "Grotto of Scriptures", "map_unlock");
+  settings.Add("map_unlock_institute", true, "Research Institute", "map_unlock");
   
   // Add individual flag settings
   foreach (var flagEntry in vars.gameFlags) {
     settings.Add(flagEntry.Key, false, flagEntry.Value.Item2, flagEntry.Value.Item1);
   }
 
-  settings.Add("mob_kill", false, "Split on Battle Memories Boss Kill");
+  settings.Add("mob_kill", true, "Split on Battle Memories Boss Kill");
   foreach (var boss in vars.memoriesOfBattleBosses) { 
     settings.Add(boss.Value, false, boss.Key, "mob_kill"); 
   }
@@ -289,14 +466,17 @@ init
 
   vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
    {
+      vars.mono = mono;
+
       var AppCore = mono["ApplicationCore",1];
       var GameCore = mono["GameCore",1];
       var ApplicationUIGroupManager = mono["ApplicationUIGroupManager", 1];
       var SaveManager = mono["SaveManager",1];
       var ConfigManager = mono["ConfigManager", 1];
       var CheatManager = mono["CheatManager", 1];
-      var CameraManager = mono["CameraManager",1];
       var MonsterManager = mono["MonsterManager",1];
+
+      vars.cameraManagerInitialized = false;
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
       // vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load, currently not in use
@@ -325,9 +505,6 @@ init
 
       vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
       
-      vars.Helper["cameraHighlightTime"] = CameraManager.Make<float>("_instance", "currentCameraCore", 0xcc); 
-      vars.Helper["cameraHighlight"] = CameraManager.Make<bool>("_instance", "currentCameraCore", 0xb0, 0x20); 
-       
        /* Flags */
       var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
       if(AllFlags.Count == 0) {
@@ -386,7 +563,7 @@ init
 
       // Closest monster check for Jiequan
       if (vars.mobFlagExists) {
-        vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster"); 
+        vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster");
         vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
       }
       
@@ -435,18 +612,20 @@ start {
 onStart {
   vars.CompletedSplits.Clear();
   current.JiFix = false;
+
+  vars.fileSelectStartTimer = new System.Diagnostics.Stopwatch();
+  vars.fileSelectStartTimer.Start();
 }
 
 isLoading
 {
-  // || (!vars.Helper["levelloading"].Current)  was causing issues, leaving as comment in case we need it again  
   return (vars.Helper["loadingscreen"].Current 
-  || (vars.Helper["gamestate"].Current == 0)  
   || (vars.Helper["gamestate"].Current == 2) 
   || (current.SceneIndex == 0)
   || (current.SceneIndex == 72) 
   || (current.SceneIndex == 7)
-  || (current.SceneIndex == 1 && vars.Helper["blackCoverOpacity"].Current > 0.99f));
+  || (current.SceneIndex == 1 && vars.Helper["blackCoverOpacity"].Current > 0.99f)
+  || (current.SceneIndex == 1 && vars.fileSelectStartTimer.ElapsedMilliseconds < 1000));
 }
 
 update
@@ -480,6 +659,21 @@ update
         // UIBossHP -> PostureSystem -> bindMonster (MonsterBase) -> phaseIndex
         current.bossPhase = vars.Helper.Read<int>(BossPosture + 0x30 + 0x448);
       }
+    }
+  }
+
+  // Try to initialize the camera if it isn't initialized yet. We can't do it in init because the camera manager isn't initialized before loading a save for the first time
+  if(!vars.cameraManagerInitialized)
+  {
+    try{
+      var CameraManager = vars.mono["CameraManager",1];
+      vars.Helper["cameraHighlightTime"] = CameraManager.Make<float>("_instance", "currentCameraCore", 0xcc); 
+      vars.Helper["cameraHighlight"] = CameraManager.Make<bool>("_instance", "currentCameraCore", 0xb0, 0x20);
+      vars.cameraManagerInitialized = true;
+      print("Camera Manager Initialized success");
+    }
+    catch{
+      // CameraManager not loaded yet
     }
   }
 }
@@ -527,7 +721,7 @@ split {
       Camera LastHitHighlight is the black and white effect on kill, and its time is set to 2f when the effect goes on screen. It has a HighlightCamera.enabled property i havent seen how to obtain yet.
       This would grab that duration as the trigger and also check if the boss has less than 1 HP for certain cases where it ends at less than 0.5 HP and fully dies after the black and white */
     if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
-      if (vars.Helper["cameraHighlightTime"].Current != vars.Helper["cameraHighlightTime"].Old && vars.Helper["cameraHighlightTime"].Current > 1.95 && current.bossPostureSystem <= 1)  {
+      if (vars.cameraManagerInitialized && vars.Helper["cameraHighlightTime"].Current != vars.Helper["cameraHighlightTime"].Old && vars.Helper["cameraHighlightTime"].Current > 1.95 && current.bossPostureSystem <= 1)  {
         foreach (var boss in vars.memoriesOfBattleBosses) {
           if (current.SceneIndex == vars.roomIndexes[boss.Value]) {
             if (settings[boss.Value] && !vars.CompletedSplits.Contains(boss.Value)) {
