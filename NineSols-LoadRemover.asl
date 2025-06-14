@@ -197,6 +197,9 @@ startup
   vars.gameFlags.Add("b70de28f-4097-406c-8cf8-583870dc4ab5_104b8d0cf618434478e9e75ae3ee9d88ScriptableDataBool", Tuple.Create("taofruit_obtain", "Abandoned Mines Tao Fruit", "ScriptableDataBool") );
   vars.gameFlags.Add("97d45562-89e6-463d-8740-4d1e012cfd18_92a5cecaeb73b428fa0e2b6990d4fb1bScriptableDataBool", Tuple.Create("taofruit_obtain", "Sky Tower Tao Fruit", "ScriptableDataBool") );
   vars.gameFlags.Add("e08b2605-4d1f-4a4e-b864-8a105f7af52b_348738fb5673845a6aa8b023a95252cfScriptableDataBool", Tuple.Create("taofruit_obtain", "Empyrean (Living Area) Tao Fruit", "ScriptableDataBool") );
+  vars.gameFlags.Add("5e282a99-9049-4628-9eac-3d5820c72bcd_115aaa87e66aa794a98737572d1454c5ScriptableDataBool", Tuple.Create("taofruit_obtain", "Lear's Tomb Tao Fruit 1", "ScriptableDataBool") );
+  vars.gameFlags.Add("7531bdad-dc7e-47db-a640-386674f940dd_115aaa87e66aa794a98737572d1454c5ScriptableDataBool", Tuple.Create("taofruit_obtain", "Lear's Tomb Tao Fruit 2", "ScriptableDataBool") );
+  vars.gameFlags.Add("951a38fc-8260-4803-89ba-b8b7affd96c4_115aaa87e66aa794a98737572d1454c5ScriptableDataBool", Tuple.Create("taofruit_obtain", "Lear's Tomb Tao Fruit 3", "ScriptableDataBool") );
 
   vars.gameFlags.Add("37adc43b-6e63-4f05-8641-7fa1e034a9ac_c6768859162eb40abaffe7d2dfb703f4ScriptableDataBool", Tuple.Create("taofruit_obtain", "Machine Room Greater Tao Fruit", "ScriptableDataBool") );
   vars.gameFlags.Add("18a7e188-ce20-495f-8ff9-49b2b0a78515_caffe6beb70444888bda9f21182c38a2ScriptableDataBool", Tuple.Create("taofruit_obtain", "Yanlao Greater Tao Fruit", "ScriptableDataBool") );
@@ -511,6 +514,7 @@ init
          return false;
       }
 
+      vars.mobFlagExists = false;
       vars.FoundFlags = new HashSet<string>();
       foreach(IntPtr FlagPtr in AllFlags) {
          //GameFlagBase._finalSaveID
