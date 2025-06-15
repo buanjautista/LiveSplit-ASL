@@ -479,6 +479,12 @@ init
       var CheatManager = mono["CheatManager", 1];
       var MonsterManager = mono["MonsterManager",1];
 
+      if(vars.Helper.Scenes.Active.Index == 0)
+      {
+          print("Active scene is loading scene. Won't try to start now.");
+          return false;
+      }
+      
       vars.cameraManagerInitialized = false;
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
@@ -488,7 +494,7 @@ init
 
       vars.Helper["savefilestart"] = AppCore.Make<bool>("_instance","IsPlayFromTitleScreen"); 
 
-      vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
+      //vars.Helper["gamestartmode2"] = mono["StartMenuLogic",1].Make<int>("_instance","gameModeFlag"); 
       
       vars.Helper["blackCoverOpacity"] = ApplicationUIGroupManager.Make<float>("_instance", "blackCover", 0x70 + 0xc); // ApplicationUIGroupManager.blackCover.m_color.a
 
@@ -503,20 +509,33 @@ init
       vars.Helper["skills_KillZombieFooAbility"] = GameCore.Make<bool>("_instance","playerAbilityCollection",0x118,0x17a); 
              
       /* Boss States */ 
-      vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
+      //vars.Helper["SlowMotion"] = mono["TimePauseManager",1].Make<float>("_instance","gamePlayTimeScaleModifier", 0x30); 
       // vars.Helper["PhaseIndex"] = GameCore.Make<int>("_instance","player", 0x4c8,0x418); 
 
       vars.Helper["bossHPUIList"] = GameCore.MakeList<IntPtr>("_instance", "monsterHpUI", 0x40); 
       
        /* Flags */
-      var AllFlags  = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
+      var AllFlags = vars.Helper.ReadList<IntPtr>(SaveManager.Static + SaveManager["_instance"], SaveManager["allFlags"], 0x18);
       if(AllFlags.Count == 0) {
+         print("allFlags count was 0. Wait for allFlags to be initialized.");
          return false;
       }
 
       vars.mobFlagExists = false;
       vars.FoundFlags = new HashSet<string>();
       foreach(IntPtr FlagPtr in AllFlags) {
+         if(FlagPtr == IntPtr.Zero) {
+             print("Flag was null. Waiting for all flags to be initialized before starting");
+             return false;
+         }
+
+         IntPtr finalSaveIDPtr = vars.Helper.Read<IntPtr>(FlagPtr + 0x20);
+         if(finalSaveIDPtr == IntPtr.Zero)
+         {
+             print("Flag was not initialized. Waiting for all flags to be initialized before starting.");
+             return false;
+         }
+         
          //GameFlagBase._finalSaveID
          string finalSaveID = vars.Helper.ReadString(256, ReadStringType.AutoDetect, FlagPtr + 0x20, 0x14);
          
