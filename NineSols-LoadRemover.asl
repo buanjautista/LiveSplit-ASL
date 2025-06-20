@@ -477,7 +477,6 @@ init
       var SaveManager = mono["SaveManager",1];
       var ConfigManager = mono["ConfigManager", 1];
       var CheatManager = mono["CheatManager", 1];
-      var MonsterManager = mono["MonsterManager",1];
 
       if(vars.Helper.Scenes.Active.Index == 0)
       {
@@ -486,6 +485,7 @@ init
       }
       
       vars.cameraManagerInitialized = false;
+      vars.monsterManagerInitialized = false;
 
       vars.Helper["loadingscreen"] = AppCore.Make<bool>("_instance","loadingScreen",0x78); // When loading screen is active
       // vars.Helper["levelloading"] = GameCore.Make<bool>("_instance","gameLevel",0x1b8);  // When level is finishing the load, currently not in use
@@ -583,12 +583,6 @@ init
                vars.mobFlagExists = true;
          }
       }
-
-      // Closest monster check for Jiequan
-      if (vars.mobFlagExists) {
-        vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster");
-        vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
-      }
       
       return true;
    });
@@ -610,7 +604,7 @@ start {
       return true;
     }
     // Jiequan detection fix, start on detecting a change in the closetMonster pointer and if the HP is jiequan's max MoB HP
-    if (current.SceneIndex == 41 && vars.Helper["closetMonster"] != null && vars.Helper["closetMonster"].Current != vars.Helper["closetMonster"].Old && vars.Helper["currentEnemyPosture"].Current == 5400) 
+    if (vars.monsterManagerInitialized && current.SceneIndex == 41 && vars.Helper["closetMonster"] != null && vars.Helper["closetMonster"].Current != vars.Helper["closetMonster"].Old && vars.Helper["currentEnemyPosture"].Current == 5400) 
     { 
       return true;
       // print("Start Jiequan: " + vars.Helper["currentEnemyPosture"].Current + " " + current.bossPostureSystem);
@@ -664,7 +658,7 @@ update
   }  
 
   // MoB HP detection updates
-  if(vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
+  if(vars.monsterManagerInitialized && vars.mobFlagExists && vars.Helper["MemoriesOfBattleFlag"].Current) {
     if (current.SceneIndex == 41) {  
       // jiequan HP detection
       current.bossPostureSystem = vars.Helper["currentEnemyPosture"].Current; 
@@ -697,6 +691,25 @@ update
     }
     catch{
       // CameraManager not loaded yet
+    }
+  }
+
+  // Try to initialize the MonsterManager if it isn't initialized yet. We can't do it in init because the monster manager isn't initialized before loading a save for the first time
+  if(!vars.monsterManagerInitialized)
+  {
+    try{
+      var MonsterManager = vars.mono["MonsterManager",1];
+      // Closest monster check for Jiequan
+      if (vars.mobFlagExists) {
+        vars.Helper["closetMonster"] = MonsterManager.Make<IntPtr>("_instance","_closetMonster");
+        vars.Helper["currentEnemyPosture"] = MonsterManager.Make<float>("_instance","_closetMonster",0x3d0,0x94); 
+      }
+      
+      vars.monsterManagerInitialized = true;
+      print("Monster Manager Initialized success");
+    }
+    catch{
+      // MonsterManager not loaded yet
     }
   }
 }
